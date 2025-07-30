@@ -1,0 +1,150 @@
+/**
+ * XP Message Box Styles
+ * Authentic Windows XP message box styling
+ */
+
+.xp-message-box-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: xp-message-box-overlay-appear 200ms ease-out;
+}
+
+.xp-message-box {
+  background: var(--xp-color-gray-light, #f0f0f0);
+  border: 2px solid var(--xp-color-gray-medium, #c0c0c0);
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.8) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.2) inset,
+    4px 4px 8px rgba(0, 0, 0, 0.3);
+  min-width: 300px;
+  max-width: 500px;
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-normal, 10.67px);
+  animation: xp-message-box-appear 200ms ease-out;
+}
+
+.xp-message-box-header {
+  background: linear-gradient(
+    to bottom,
+    var(--xp-color-primary-blueLight, #4a90e2),
+    var(--xp-color-primary-blueDark, #0054e3)
+  );
+  color: var(--xp-color-text-onBlue, #ffffff);
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--xp-color-primary-blueDark, #0054e3);
+}
+
+.xp-message-box-title {
+  margin: 0;
+  font-size: var(--xp-font-size-normal, 10.67px);
+  font-weight: bold;
+}
+
+.xp-message-box-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px;
+}
+
+.xp-message-box-icon {
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.xp-message-box-message {
+  flex: 1;
+  line-height: 1.4;
+  color: var(--xp-color-text-primary, #000000);
+  word-wrap: break-word;
+}
+
+.xp-message-box-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  padding: 12px 16px 16px;
+  border-top: 1px solid var(--xp-color-gray-medium, #c0c0c0);
+  background: var(--xp-color-gray-silver, #ece9d8);
+}
+
+/* Message box type variants */
+.xp-message-box--info .xp-message-box-header {
+  background: linear-gradient(to bottom, #4a90e2, #0054e3);
+}
+
+.xp-message-box--warning .xp-message-box-header {
+  background: linear-gradient(to bottom, #ffd700, #cc9900);
+  color: var(--xp-color-text-primary, #000000);
+}
+
+.xp-message-box--error .xp-message-box-header {
+  background: linear-gradient(to bottom, #ff4444, #cc0000);
+}
+
+.xp-message-box--question .xp-message-box-header {
+  background: linear-gradient(to bottom, #4a90e2, #0054e3);
+}
+
+/* Animations */
+@keyframes xp-message-box-overlay-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes xp-message-box-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .xp-message-box {
+    background: Canvas;
+    border-color: CanvasText;
+  }
+
+  .xp-message-box-header {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .xp-message-box-message {
+    color: CanvasText;
+  }
+
+  .xp-message-box-buttons {
+    background: Canvas;
+    border-color: CanvasText;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .xp-message-box-overlay,
+  .xp-message-box {
+    animation: none;
+  }
+}

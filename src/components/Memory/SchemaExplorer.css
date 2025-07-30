@@ -1,0 +1,311 @@
+/**
+ * Schema Explorer Styles
+ * Windows XP styling for database schema display
+ */
+
+.schema-explorer {
+  font-family: 'Tahoma', sans-serif;
+  font-size: 11px;
+  color: #000;
+}
+
+.schema-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 8px;
+}
+
+.schema-header h4 {
+  margin: 0;
+  font-size: 11px;
+  font-weight: bold;
+  color: #000;
+}
+
+.schema-info {
+  font-size: 10px;
+  color: #666;
+}
+
+.schema-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.schema-item {
+  border: 1px solid #ccc;
+  margin-bottom: 2px;
+  background: #fff;
+}
+
+.schema-header-item {
+  display: flex;
+  align-items: center;
+  padding: 4px 6px;
+  cursor: pointer;
+  background: #f8f8f8;
+  border-bottom: 1px solid #e0e0e0;
+  gap: 4px;
+}
+
+.schema-header-item:hover {
+  background: #e8f4fd;
+}
+
+.schema-header-item.selected {
+  background: #316ac5;
+  color: white;
+}
+
+.expand-button {
+  background: none;
+  border: none;
+  font-size: 8px;
+  cursor: pointer;
+  padding: 0;
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: inherit;
+}
+
+.schema-icon {
+  font-size: 12px;
+}
+
+.schema-name {
+  font-weight: bold;
+  flex: 1;
+}
+
+.column-count {
+  font-size: 10px;
+  color: #666;
+}
+
+.schema-header-item.selected .column-count {
+  color: #ccc;
+}
+
+.schema-details {
+  padding: 8px;
+  background: #fff;
+  border-top: 1px solid #e0e0e0;
+}
+
+.columns-section,
+.relationships-section,
+.indexes-section {
+  margin-bottom: 12px;
+}
+
+.columns-section h5,
+.relationships-section h5,
+.indexes-section h5 {
+  margin: 0 0 4px 0;
+  font-size: 10px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+}
+
+.columns-list {
+  border: 1px inset #f0f0f0;
+  background: #fff;
+  max-height: 120px;
+  overflow-y: auto;
+}
+
+.column-item {
+  display: flex;
+  align-items: center;
+  padding: 2px 6px;
+  border-bottom: 1px solid #f0f0f0;
+  gap: 8px;
+}
+
+.column-item:last-child {
+  border-bottom: none;
+}
+
+.column-item:nth-child(even) {
+  background: #f8f8f8;
+}
+
+.column-name {
+  font-weight: bold;
+  min-width: 80px;
+  color: #000;
+}
+
+.column-type {
+  color: #666;
+  font-family: 'Courier New', monospace;
+  font-size: 10px;
+  min-width: 100px;
+}
+
+.column-flags {
+  display: flex;
+  gap: 2px;
+  margin-left: auto;
+}
+
+.flag {
+  background: #e0e0e0;
+  border: 1px solid #ccc;
+  padding: 1px 3px;
+  font-size: 8px;
+  font-weight: bold;
+  border-radius: 0;
+}
+
+.flag.pk {
+  background: #ffeb3b;
+  color: #000;
+}
+
+.flag.unique {
+  background: #2196f3;
+  color: white;
+}
+
+.flag.not-null {
+  background: #ff9800;
+  color: white;
+}
+
+.relationships-list,
+.indexes-list {
+  background: #fff;
+  border: 1px inset #f0f0f0;
+}
+
+.relationship-item,
+.index-item {
+  display: flex;
+  align-items: center;
+  padding: 3px 6px;
+  border-bottom: 1px solid #f0f0f0;
+  gap: 6px;
+}
+
+.relationship-item:last-child,
+.index-item:last-child {
+  border-bottom: none;
+}
+
+.rel-icon,
+.index-icon {
+  font-size: 10px;
+}
+
+.rel-text,
+.index-name {
+  flex: 1;
+  font-size: 10px;
+}
+
+.rel-type {
+  font-size: 9px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+.index-columns {
+  font-size: 10px;
+  color: #666;
+  font-family: 'Courier New', monospace;
+}
+
+.schema-metadata {
+  margin-top: 8px;
+  padding-top: 4px;
+  border-top: 1px solid #e0e0e0;
+  font-size: 9px;
+  color: #666;
+}
+
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  color: #666;
+}
+
+.empty-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.empty-message strong {
+  display: block;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 12px;
+}
+
+.empty-message p {
+  margin: 0;
+  font-size: 10px;
+  line-height: 1.4;
+  max-width: 250px;
+}
+
+/* Scrollbar styling */
+.schema-list::-webkit-scrollbar,
+.columns-list::-webkit-scrollbar {
+  width: 16px;
+}
+
+.schema-list::-webkit-scrollbar-track,
+.columns-list::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border: 1px inset #f0f0f0;
+}
+
+.schema-list::-webkit-scrollbar-thumb,
+.columns-list::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 1px outset #c0c0c0;
+}
+
+.schema-list::-webkit-scrollbar-thumb:hover,
+.columns-list::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .schema-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .column-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+  
+  .column-flags {
+    margin-left: 0;
+  }
+  
+  .relationship-item,
+  .index-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+}

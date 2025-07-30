@@ -1,0 +1,270 @@
+/**
+ * XP UI Component Animations
+ * Authentic Windows XP animation definitions
+ */
+
+/* Animation Variables */
+:root {
+  --xp-timing-button-press: 0ms;
+  --xp-timing-button-hover: 0ms;
+  --xp-timing-menu-slide: 150ms;
+  --xp-timing-menu-fade: 150ms;
+  --xp-timing-dialog-appear: 200ms;
+  --xp-timing-window-open: 200ms;
+  --xp-timing-tooltip-show: 500ms;
+  
+  --xp-easing-standard: ease-out;
+  --xp-easing-menu: ease-out;
+  --xp-easing-dialog: ease-out;
+  --xp-easing-window: ease-out;
+}
+
+/* Fade Animations */
+@keyframes xp-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes xp-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+/* Slide Animations */
+@keyframes xp-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes xp-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes xp-slide-left {
+  from {
+    opacity: 0;
+    transform: translateX(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes xp-slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Scale Animations */
+@keyframes xp-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes xp-scale-out {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+}
+
+/* Button Press Animation */
+@keyframes xp-button-press {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(1px);
+  }
+}
+
+/* Animation Classes */
+.xp-fade-in {
+  animation: xp-fade-in var(--xp-timing-menu-fade) var(--xp-easing-standard);
+}
+
+.xp-fade-out {
+  animation: xp-fade-out var(--xp-timing-menu-fade) var(--xp-easing-standard);
+}
+
+.xp-slide-down {
+  animation: xp-slide-down var(--xp-timing-menu-slide) var(--xp-easing-menu);
+}
+
+.xp-slide-up {
+  animation: xp-slide-up var(--xp-timing-menu-slide) var(--xp-easing-menu);
+}
+
+.xp-slide-left {
+  animation: xp-slide-left var(--xp-timing-menu-slide) var(--xp-easing-menu);
+}
+
+.xp-slide-right {
+  animation: xp-slide-right var(--xp-timing-menu-slide) var(--xp-easing-menu);
+}
+
+.xp-scale-in {
+  animation: xp-scale-in var(--xp-timing-dialog-appear) var(--xp-easing-dialog);
+}
+
+.xp-scale-out {
+  animation: xp-scale-out var(--xp-timing-dialog-appear) var(--xp-easing-dialog);
+}
+
+.xp-button-press {
+  animation: xp-button-press var(--xp-timing-button-press) var(--xp-easing-standard);
+}
+
+/* Hover Transitions */
+.xp-hover-transition {
+  transition: 
+    background-color var(--xp-timing-button-hover) var(--xp-easing-standard),
+    border-color var(--xp-timing-button-hover) var(--xp-easing-standard),
+    color var(--xp-timing-button-hover) var(--xp-easing-standard);
+}
+
+/* Focus Transitions */
+.xp-focus-transition {
+  transition: outline var(--xp-timing-button-hover) var(--xp-easing-standard);
+}
+
+/* Spinner Animation */
+@keyframes xp-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.xp-spin {
+  animation: xp-spin 1s linear infinite;
+}
+
+/* Pulse Animation for Loading States */
+@keyframes xp-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.xp-pulse {
+  animation: xp-pulse 2s ease-in-out infinite;
+}
+
+/* Window Minimize Animation */
+@keyframes xp-window-minimize {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.1) translateY(100px);
+  }
+}
+
+.xp-window-minimize {
+  animation: xp-window-minimize var(--xp-timing-window-open) var(--xp-easing-window);
+}
+
+/* Window Maximize Animation */
+@keyframes xp-window-maximize {
+  from {
+    transform: scale(0.8);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+.xp-window-maximize {
+  animation: xp-window-maximize var(--xp-timing-window-open) var(--xp-easing-window);
+}
+
+/* Tooltip Animations */
+@keyframes xp-tooltip-appear {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.xp-tooltip-appear {
+  animation: xp-tooltip-appear var(--xp-timing-tooltip-show) var(--xp-easing-standard);
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --xp-timing-button-press: 0ms;
+    --xp-timing-button-hover: 0ms;
+    --xp-timing-menu-slide: 0ms;
+    --xp-timing-menu-fade: 0ms;
+    --xp-timing-dialog-appear: 0ms;
+    --xp-timing-window-open: 0ms;
+    --xp-timing-tooltip-show: 0ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .xp-spin {
+    animation: none;
+  }
+
+  .xp-pulse {
+    animation: none;
+  }
+}

@@ -1,0 +1,362 @@
+/**
+ * XP Form Styles
+ * Authentic Windows XP form control styling
+ */
+
+.xp-form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+}
+
+.xp-form-label {
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-normal, 10.67px);
+  color: var(--xp-color-text-primary, #000000);
+  font-weight: normal;
+}
+
+.xp-form-required {
+  color: #cc0000;
+  margin-left: 2px;
+}
+
+.xp-form-helper {
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-small, 10.67px);
+  color: var(--xp-color-text-disabled, #808080);
+  margin-top: 2px;
+}
+
+.xp-text-input {
+  height: 24px;
+  padding: 4px 6px;
+  background: var(--xp-color-base-white, #ffffff);
+  border: 2px solid var(--xp-color-gray-medium, #c0c0c0);
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-normal, 10.67px);
+  color: var(--xp-color-text-primary, #000000);
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset;
+  border-radius: 0;
+}
+
+.xp-text-input:focus {
+  outline: none;
+  border-color: var(--xp-color-primary-blueAccent, #316ac5);
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset,
+    0 0 0 1px var(--xp-color-primary-blueAccent, #316ac5);
+}
+
+.xp-text-input:disabled {
+  background: var(--xp-color-gray-light, #f0f0f0);
+  color: var(--xp-color-text-disabled, #808080);
+  cursor: not-allowed;
+}
+
+.xp-text-input--error {
+  border-color: #cc0000;
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset,
+    0 0 0 1px #cc0000;
+}
+
+.xp-form-error {
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-small, 10.67px);
+  color: #cc0000;
+  margin-top: 2px;
+}
+
+/* Textarea Styles */
+.xp-textarea {
+  min-height: 60px;
+  padding: 4px 6px;
+  background: var(--xp-color-base-white, #ffffff);
+  border: 2px solid var(--xp-color-gray-medium, #c0c0c0);
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-normal, 10.67px);
+  color: var(--xp-color-text-primary, #000000);
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset;
+  border-radius: 0;
+  resize: vertical;
+}
+
+.xp-textarea:focus {
+  outline: none;
+  border-color: var(--xp-color-primary-blueAccent, #316ac5);
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset,
+    0 0 0 1px var(--xp-color-primary-blueAccent, #316ac5);
+}
+
+.xp-textarea:disabled {
+  background: var(--xp-color-gray-light, #f0f0f0);
+  color: var(--xp-color-text-disabled, #808080);
+  cursor: not-allowed;
+  resize: none;
+}
+
+.xp-textarea--error {
+  border-color: #cc0000;
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset,
+    0 0 0 1px #cc0000;
+}
+
+/* Checkbox Styles */
+.xp-checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.xp-checkbox {
+  width: 13px;
+  height: 13px;
+  background: var(--xp-color-base-white, #ffffff);
+  border: 2px solid var(--xp-color-gray-medium, #c0c0c0);
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  position: relative;
+  margin: 0;
+}
+
+.xp-checkbox:checked {
+  background: var(--xp-color-base-white, #ffffff);
+}
+
+.xp-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: -2px;
+  left: 1px;
+  font-size: 10px;
+  color: var(--xp-color-text-primary, #000000);
+  font-weight: bold;
+}
+
+.xp-checkbox:indeterminate::after {
+  content: '−';
+  position: absolute;
+  top: -3px;
+  left: 1px;
+  font-size: 12px;
+  color: var(--xp-color-text-primary, #000000);
+  font-weight: bold;
+}
+
+.xp-checkbox:focus {
+  outline: 1px dotted var(--xp-color-text-primary, #000000);
+  outline-offset: 2px;
+}
+
+.xp-checkbox:disabled {
+  background: var(--xp-color-gray-light, #f0f0f0);
+  cursor: not-allowed;
+}
+
+.xp-checkbox-label {
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-normal, 10.67px);
+  color: var(--xp-color-text-primary, #000000);
+  cursor: pointer;
+}
+
+.xp-checkbox:disabled + .xp-checkbox-label {
+  color: var(--xp-color-text-disabled, #808080);
+  cursor: not-allowed;
+}
+
+.xp-checkbox--error {
+  border-color: #cc0000;
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset,
+    0 0 0 1px #cc0000;
+}
+
+/* Radio Button Styles */
+.xp-radio-container {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.xp-radio-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.xp-radio {
+  width: 13px;
+  height: 13px;
+  background: var(--xp-color-base-white, #ffffff);
+  border: 2px solid var(--xp-color-gray-medium, #c0c0c0);
+  border-radius: 50%;
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  position: relative;
+  margin: 0;
+}
+
+.xp-radio:checked::after {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 5px;
+  height: 5px;
+  background: var(--xp-color-text-primary, #000000);
+  border-radius: 50%;
+}
+
+.xp-radio:focus {
+  outline: 1px dotted var(--xp-color-text-primary, #000000);
+  outline-offset: 2px;
+}
+
+.xp-radio:disabled {
+  background: var(--xp-color-gray-light, #f0f0f0);
+  cursor: not-allowed;
+}
+
+.xp-radio-label {
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-normal, 10.67px);
+  color: var(--xp-color-text-primary, #000000);
+  cursor: pointer;
+}
+
+.xp-radio:disabled + .xp-radio-label {
+  color: var(--xp-color-text-disabled, #808080);
+  cursor: not-allowed;
+}
+
+.xp-radio--error {
+  border-color: #cc0000;
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset,
+    0 0 0 1px #cc0000;
+}
+
+/* Select Styles */
+.xp-select-container {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+.xp-select {
+  width: 100%;
+  height: 24px;
+  padding: 2px 20px 2px 6px;
+  background: var(--xp-color-base-white, #ffffff);
+  border: 2px solid var(--xp-color-gray-medium, #c0c0c0);
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-normal, 10.67px);
+  color: var(--xp-color-text-primary, #000000);
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset;
+  border-radius: 0;
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.xp-select:focus {
+  outline: none;
+  border-color: var(--xp-color-primary-blueAccent, #316ac5);
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset,
+    0 0 0 1px var(--xp-color-primary-blueAccent, #316ac5);
+}
+
+.xp-select:disabled {
+  background: var(--xp-color-gray-light, #f0f0f0);
+  color: var(--xp-color-text-disabled, #808080);
+  cursor: not-allowed;
+}
+
+.xp-select--error {
+  border-color: #cc0000;
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset,
+    0 0 0 1px #cc0000;
+}
+
+.xp-select-arrow {
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  color: var(--xp-color-text-primary, #000000);
+}
+
+.xp-select:disabled + .xp-select-arrow {
+  color: var(--xp-color-text-disabled, #808080);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .xp-text-input,
+  .xp-textarea,
+  .xp-select {
+    background: Field;
+    color: FieldText;
+    border-color: FieldText;
+  }
+
+  .xp-text-input:focus,
+  .xp-textarea:focus,
+  .xp-select:focus {
+    border-color: Highlight;
+  }
+
+  .xp-checkbox,
+  .xp-radio {
+    background: Field;
+    border-color: FieldText;
+  }
+
+  .xp-form-label,
+  .xp-checkbox-label,
+  .xp-radio-label {
+    color: FieldText;
+  }
+
+  .xp-form-error {
+    color: #ff0000;
+  }
+
+  .xp-form-helper {
+    color: GrayText;
+  }
+
+  .xp-select-arrow {
+    color: FieldText;
+  }
+}

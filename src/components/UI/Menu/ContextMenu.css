@@ -1,0 +1,28 @@
+/**
+ * XP Context Menu Styles
+ * Authentic Windows XP right-click context menu styling
+ */
+
+.xp-context-menu {
+  animation: xp-context-menu-appear 150ms ease-out;
+  filter: drop-shadow(2px 2px 4px rgba(0, 0, 0, 0.3));
+}
+
+/* Context menu appearance animation */
+@keyframes xp-context-menu-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .xp-context-menu {
+    animation: none;
+  }
+}

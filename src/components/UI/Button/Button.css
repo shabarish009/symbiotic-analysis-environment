@@ -1,0 +1,296 @@
+/**
+ * XP Button Styles
+ * Authentic Windows XP button styling with 3D effects
+ */
+
+.xp-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-normal, 10.67px);
+  font-weight: normal;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1px solid var(--xp-color-gray-medium, #c0c0c0);
+  border-radius: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  transition: none;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Button Variants */
+.xp-button--default {
+  background: linear-gradient(
+    to bottom,
+    var(--xp-color-gray-light, #f0f0f0),
+    #d8d8d8
+  );
+  color: var(--xp-color-text-primary, #000000);
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.8) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.2) inset;
+}
+
+.xp-button--primary {
+  background: linear-gradient(
+    to bottom,
+    var(--xp-color-primary-blueLight, #4a90e2),
+    var(--xp-color-primary-blueAccent, #316ac5)
+  );
+  color: var(--xp-color-text-onBlue, #ffffff);
+  border-color: var(--xp-color-primary-blueDark, #0054e3);
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.3) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.3) inset;
+}
+
+.xp-button--secondary {
+  background: linear-gradient(
+    to bottom,
+    var(--xp-color-gray-silver, #ece9d8),
+    #d4d0c8
+  );
+  color: var(--xp-color-text-primary, #000000);
+  border-color: var(--xp-color-gray-medium, #c0c0c0);
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.8) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.2) inset;
+}
+
+.xp-button--icon {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--xp-color-text-primary, #000000);
+  box-shadow: none;
+  padding: 2px;
+}
+
+.xp-button--icon:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #e6f2ff, #cce5ff);
+  border-color: var(--xp-color-primary-blueAccent, #316ac5);
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.8) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.2) inset;
+}
+
+.xp-button--toolbar {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--xp-color-text-primary, #000000);
+  box-shadow: none;
+  height: 22px;
+  padding: 1px 4px;
+}
+
+.xp-button--toolbar:hover:not(:disabled) {
+  background: linear-gradient(
+    to bottom,
+    var(--xp-color-gray-light, #f0f0f0),
+    #d8d8d8
+  );
+  border-color: var(--xp-color-gray-medium, #c0c0c0);
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.8) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.2) inset;
+}
+
+/* Button Sizes */
+.xp-button--small {
+  height: 20px;
+  padding: 0 8px;
+  font-size: var(--xp-font-size-small, 10.67px);
+}
+
+.xp-button--medium {
+  height: 24px;
+  padding: 0 12px;
+  font-size: var(--xp-font-size-normal, 10.67px);
+}
+
+.xp-button--large {
+  height: 28px;
+  padding: 0 16px;
+  font-size: var(--xp-font-size-large, 12px);
+}
+
+/* Button States */
+.xp-button:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #e6f2ff, #cce5ff);
+  border-color: var(--xp-color-primary-blueAccent, #316ac5);
+}
+
+.xp-button--primary:hover:not(:disabled) {
+  background: linear-gradient(to bottom, #5ba0f2, #4080d5);
+}
+
+.xp-button:active:not(:disabled) {
+  background: linear-gradient(
+    to bottom,
+    #d8d8d8,
+    var(--xp-color-gray-light, #f0f0f0)
+  );
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset;
+  transform: translateY(1px);
+}
+
+.xp-button--primary:active:not(:disabled) {
+  background: linear-gradient(
+    to bottom,
+    var(--xp-color-primary-blueAccent, #316ac5),
+    var(--xp-color-primary-blueLight, #4a90e2)
+  );
+}
+
+.xp-button:focus:not(:disabled) {
+  outline: 1px dotted var(--xp-color-text-primary, #000000);
+  outline-offset: -3px;
+}
+
+.xp-button--primary:focus:not(:disabled) {
+  outline-color: var(--xp-color-text-onBlue, #ffffff);
+}
+
+.xp-button:disabled,
+.xp-button--disabled {
+  background: var(--xp-color-gray-light, #f0f0f0);
+  color: var(--xp-color-text-disabled, #808080);
+  border-color: var(--xp-color-gray-medium, #c0c0c0);
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.xp-button--loading {
+  cursor: wait;
+}
+
+.xp-button--pressed {
+  background: linear-gradient(
+    to bottom,
+    #d8d8d8,
+    var(--xp-color-gray-light, #f0f0f0)
+  );
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset;
+  transform: translateY(1px);
+}
+
+.xp-button--group {
+  border-radius: 0;
+}
+
+.xp-button--group:not(:first-child) {
+  border-left: none;
+}
+
+.xp-button--group:first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.xp-button--group:last-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.xp-button--icon-only {
+  width: 24px;
+  height: 24px;
+  padding: 2px;
+  min-width: auto;
+}
+
+/* Button Content */
+.xp-button-text {
+  display: inline-block;
+}
+
+.xp-button-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+}
+
+.xp-button-icon--left {
+  margin-right: 4px;
+}
+
+.xp-button-icon--right {
+  margin-left: 4px;
+}
+
+.xp-button-icon--only {
+  margin: 0;
+}
+
+.xp-button-spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .xp-button {
+    background: ButtonFace;
+    color: ButtonText;
+    border-color: ButtonText;
+  }
+
+  .xp-button:hover:not(:disabled) {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .xp-button:disabled {
+    color: GrayText;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .xp-button {
+    transition: none;
+  }
+
+  .xp-button:active:not(:disabled) {
+    transform: none;
+  }
+
+  .xp-button-spinner {
+    animation: none;
+  }
+}

@@ -1,0 +1,301 @@
+/**
+ * WindowFrame Styles
+ * Authentic Windows XP window chrome styling
+ */
+
+.window-frame {
+  position: absolute;
+  background: var(--xp-color-gray-silver, #ece9d8);
+  border: 2px solid var(--xp-color-gray-medium, #c0c0c0);
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.8) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.2) inset,
+    2px 2px 4px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+  min-height: 100px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.window-frame.active {
+  border-color: var(--xp-color-primary-blueAccent, #316ac5);
+}
+
+.window-frame.inactive {
+  border-color: var(--xp-color-gray-medium, #c0c0c0);
+}
+
+.window-frame.maximized {
+  border: none;
+  box-shadow: none;
+}
+
+/* Title Bar */
+.window-title-bar {
+  height: 30px;
+  background: linear-gradient(
+    to bottom,
+    var(--xp-color-primary-blueLight, #4a90e2),
+    var(--xp-color-primary-blueDark, #0054e3)
+  );
+  color: var(--xp-color-text-onBlue, #ffffff);
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  cursor: move;
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-normal, 10.67px);
+  font-weight: bold;
+}
+
+.window-frame.inactive .window-title-bar {
+  background: linear-gradient(
+    to bottom,
+    var(--xp-color-gray-light, #f0f0f0),
+    var(--xp-color-gray-medium, #c0c0c0)
+  );
+  color: var(--xp-color-text-primary, #000000);
+}
+
+.window-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-left: 4px;
+}
+
+/* Window Controls */
+.window-controls {
+  display: flex;
+  gap: 2px;
+}
+
+.window-control-button {
+  width: 21px;
+  height: 21px;
+  background: linear-gradient(
+    to bottom,
+    var(--xp-color-gray-light, #f0f0f0),
+    #d0d0d0
+  );
+  border: 1px solid var(--xp-color-gray-medium, #c0c0c0);
+  color: var(--xp-color-text-primary, #000000);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.8) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.2) inset;
+}
+
+.window-control-button:hover {
+  background: linear-gradient(to bottom, #e6f2ff, #cce5ff);
+  border-color: var(--xp-color-primary-blueAccent, #316ac5);
+}
+
+.window-control-button:active {
+  background: linear-gradient(
+    to bottom,
+    #d0d0d0,
+    var(--xp-color-gray-light, #f0f0f0)
+  );
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset;
+}
+
+.window-control-button:focus {
+  outline: 1px dotted var(--xp-color-text-primary, #000000);
+  outline-offset: -2px;
+}
+
+.window-control-button.close:hover {
+  background: linear-gradient(to bottom, #ff6b6b, #e74c3c);
+  color: var(--xp-color-base-white, #ffffff);
+}
+
+/* Window Content */
+.window-content {
+  flex: 1;
+  background: var(--xp-color-base-white, #ffffff);
+  overflow: auto;
+  position: relative;
+}
+
+/* Resize Handles */
+.resize-handle {
+  position: absolute;
+  background: transparent;
+}
+
+.resize-handle.resize-n {
+  top: -2px;
+  left: 2px;
+  right: 2px;
+  height: 4px;
+  cursor: n-resize;
+}
+
+.resize-handle.resize-s {
+  bottom: -2px;
+  left: 2px;
+  right: 2px;
+  height: 4px;
+  cursor: s-resize;
+}
+
+.resize-handle.resize-e {
+  top: 2px;
+  right: -2px;
+  bottom: 2px;
+  width: 4px;
+  cursor: e-resize;
+}
+
+.resize-handle.resize-w {
+  top: 2px;
+  left: -2px;
+  bottom: 2px;
+  width: 4px;
+  cursor: w-resize;
+}
+
+.resize-handle.resize-ne {
+  top: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  cursor: ne-resize;
+}
+
+.resize-handle.resize-nw {
+  top: -2px;
+  left: -2px;
+  width: 8px;
+  height: 8px;
+  cursor: nw-resize;
+}
+
+.resize-handle.resize-se {
+  bottom: -2px;
+  right: -2px;
+  width: 8px;
+  height: 8px;
+  cursor: se-resize;
+}
+
+.resize-handle.resize-sw {
+  bottom: -2px;
+  left: -2px;
+  width: 8px;
+  height: 8px;
+  cursor: sw-resize;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .window-frame {
+    background: Canvas;
+    border-color: CanvasText;
+  }
+
+  .window-frame.active {
+    border-color: Highlight;
+  }
+
+  .window-title-bar {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .window-frame.inactive .window-title-bar {
+    background: ButtonFace;
+    color: ButtonText;
+  }
+
+  .window-control-button {
+    background: ButtonFace;
+    color: ButtonText;
+    border-color: ButtonText;
+  }
+
+  .window-content {
+    background: Canvas;
+  }
+}
+
+/* Performance optimizations */
+.window-frame {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+.window-frame.dragging {
+  pointer-events: none; /* Improve drag performance */
+}
+
+.window-frame.resizing {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Enhanced visual effects */
+.window-frame.active {
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.8) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.2) inset,
+    0 4px 12px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(49, 106, 197, 0.2);
+}
+
+.window-frame.inactive {
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.6) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.1) inset,
+    2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* High contrast mode enhancements */
+.window-frame.high-contrast-mode {
+  border-width: 3px;
+  box-shadow: none;
+}
+
+.window-frame.high-contrast-mode.active {
+  border-color: Highlight;
+  background: Canvas;
+}
+
+.window-frame.high-contrast-mode .window-title-bar {
+  background: Highlight;
+  color: HighlightText;
+  border-bottom: 2px solid HighlightText;
+}
+
+.window-frame.high-contrast-mode.inactive .window-title-bar {
+  background: ButtonFace;
+  color: ButtonText;
+  border-bottom: 2px solid ButtonText;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .window-control-button {
+    transition: none;
+  }
+
+  .window-frame {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .window-frame * {
+    transition: none !important;
+    animation: none !important;
+  }
+}

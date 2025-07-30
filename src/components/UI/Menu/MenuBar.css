@@ -1,0 +1,113 @@
+/**
+ * XP Menu Bar Styles
+ * Authentic Windows XP application menu bar styling
+ */
+
+.xp-menu-bar {
+  background: var(--xp-color-gray-light, #f0f0f0);
+  border-bottom: 1px solid var(--xp-color-gray-medium, #c0c0c0);
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-normal, 10.67px);
+  user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+}
+
+.xp-menu-bar-items {
+  display: flex;
+  align-items: center;
+  height: 24px;
+  padding: 0 4px;
+}
+
+.xp-menu-bar-item-container {
+  position: relative;
+}
+
+.xp-menu-bar-item {
+  background: transparent;
+  border: none;
+  color: var(--xp-color-text-primary, #000000);
+  padding: 4px 8px;
+  height: 24px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  display: flex;
+  align-items: center;
+  border-radius: 0;
+}
+
+.xp-menu-bar-item:hover:not(:disabled) {
+  background: var(--xp-color-primary-blueAccent, #316ac5);
+  color: var(--xp-color-text-onBlue, #ffffff);
+}
+
+.xp-menu-bar-item--active {
+  background: var(--xp-color-primary-blueAccent, #316ac5);
+  color: var(--xp-color-text-onBlue, #ffffff);
+}
+
+.xp-menu-bar-item--disabled {
+  color: var(--xp-color-text-disabled, #808080);
+  cursor: not-allowed;
+}
+
+.xp-menu-bar-item:focus {
+  outline: 1px dotted var(--xp-color-text-primary, #000000);
+  outline-offset: -2px;
+}
+
+.xp-menu-bar-item--active:focus,
+.xp-menu-bar-item:focus:hover:not(:disabled) {
+  outline-color: var(--xp-color-text-onBlue, #ffffff);
+}
+
+.xp-menu-bar-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  animation: xp-menu-slide-down 150ms ease-out;
+}
+
+/* XP Menu animations */
+@keyframes xp-menu-slide-down {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .xp-menu-bar {
+    background: Canvas;
+    border-color: CanvasText;
+  }
+
+  .xp-menu-bar-item {
+    color: CanvasText;
+  }
+
+  .xp-menu-bar-item:hover:not(:disabled),
+  .xp-menu-bar-item--active {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .xp-menu-bar-item--disabled {
+    color: GrayText;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .xp-menu-bar-dropdown {
+    animation: none;
+  }
+}

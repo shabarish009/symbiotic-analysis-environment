@@ -1,0 +1,109 @@
+/**
+ * XP Menu Styles
+ * Authentic Windows XP menu styling
+ */
+
+.xp-menu {
+  background: var(--xp-color-gray-light, #f0f0f0);
+  border: 2px solid var(--xp-color-gray-medium, #c0c0c0);
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.8) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.2) inset,
+    2px 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 2px;
+  min-width: 120px;
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-normal, 10.67px);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.xp-menu-item {
+  width: 100%;
+  height: 24px;
+  background: transparent;
+  border: none;
+  color: var(--xp-color-text-primary, #000000);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 8px;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+  font-size: inherit;
+  position: relative;
+}
+
+.xp-menu-item:hover:not(:disabled) {
+  background: var(--xp-color-primary-blueAccent, #316ac5);
+  color: var(--xp-color-text-onBlue, #ffffff);
+}
+
+.xp-menu-item:focus:not(:disabled) {
+  outline: 1px dotted var(--xp-color-text-primary, #000000);
+  outline-offset: -2px;
+}
+
+.xp-menu-item:focus:hover:not(:disabled) {
+  outline-color: var(--xp-color-text-onBlue, #ffffff);
+}
+
+.xp-menu-item--disabled {
+  color: var(--xp-color-text-disabled, #808080);
+  cursor: not-allowed;
+}
+
+.xp-menu-item-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.xp-menu-item-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.xp-menu-item-shortcut {
+  font-size: var(--xp-font-size-small, 10.67px);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.xp-menu-separator {
+  height: 1px;
+  background: var(--xp-color-gray-medium, #c0c0c0);
+  margin: 2px 4px;
+  border: none;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .xp-menu {
+    background: Canvas;
+    border-color: CanvasText;
+  }
+
+  .xp-menu-item {
+    color: CanvasText;
+  }
+
+  .xp-menu-item:hover:not(:disabled) {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .xp-menu-item--disabled {
+    color: GrayText;
+  }
+
+  .xp-menu-separator {
+    background: CanvasText;
+  }
+}

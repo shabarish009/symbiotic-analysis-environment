@@ -1,0 +1,280 @@
+/**
+ * Execution Metrics Display Styles
+ * XP-themed styling for execution metrics display
+ */
+
+.execution-metrics-display {
+  background: white;
+  border: 1px inset #c0c0c0;
+  padding: 8px;
+}
+
+.metrics-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.metrics-header h4 {
+  margin: 0;
+  font-size: 11px;
+  font-weight: bold;
+  color: #333;
+}
+
+.overall-rating {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.rating-icon {
+  font-size: 14px;
+}
+
+.rating-text {
+  font-size: 10px;
+  font-weight: bold;
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.metric-card {
+  background: #f8f8f8;
+  border: 1px outset #c0c0c0;
+  padding: 8px;
+  text-align: center;
+}
+
+.metric-card.primary {
+  background: #f0f4ff;
+  border: 2px outset #c8d6ff;
+}
+
+.metric-icon {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.metric-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.metric-value {
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.metric-label {
+  font-size: 9px;
+  color: #666;
+  font-weight: bold;
+}
+
+.metric-description {
+  font-size: 8px;
+  color: #888;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+.performance-breakdown {
+  margin-bottom: 12px;
+}
+
+.performance-breakdown h5 {
+  margin: 0 0 6px 0;
+  font-size: 11px;
+  color: #333;
+}
+
+.breakdown-items {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.breakdown-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breakdown-label {
+  font-size: 10px;
+  color: #666;
+  min-width: 80px;
+}
+
+.breakdown-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.breakdown-bar {
+  flex: 1;
+  height: 8px;
+  background: #f0f0f0;
+  border: 1px inset #c0c0c0;
+  position: relative;
+}
+
+.breakdown-fill {
+  height: 100%;
+  transition: width 0.3s ease-in-out;
+}
+
+.breakdown-text {
+  font-size: 9px;
+  color: #333;
+  min-width: 80px;
+}
+
+.performance-tips {
+  margin-bottom: 12px;
+}
+
+.performance-tips h5 {
+  margin: 0 0 6px 0;
+  font-size: 11px;
+  color: #333;
+}
+
+.tips-list {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.tip-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 4px;
+  border-radius: 2px;
+  font-size: 10px;
+  line-height: 1.3;
+}
+
+.tip-item.positive {
+  background: #f0f8f0;
+  border: 1px solid #c8e6c9;
+}
+
+.tip-item.warning {
+  background: #fff8f0;
+  border: 1px solid #ffcc80;
+}
+
+.tip-item.info {
+  background: #f0f4ff;
+  border: 1px solid #c8d6ff;
+}
+
+.tip-icon {
+  font-size: 11px;
+  margin-top: 1px;
+}
+
+.tip-text {
+  color: #333;
+}
+
+.performance-comparison {
+  margin-bottom: 0;
+}
+
+.performance-comparison h5 {
+  margin: 0 0 6px 0;
+  font-size: 11px;
+  color: #333;
+}
+
+.comparison-items {
+  display: flex;
+  justify-content: space-around;
+  padding: 6px;
+  background: #f8f8f8;
+  border: 1px inset #c0c0c0;
+}
+
+.comparison-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.comparison-label {
+  font-size: 9px;
+  color: #666;
+}
+
+.comparison-value {
+  font-size: 10px;
+  font-weight: bold;
+  color: #333;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .metrics-header {
+    flex-direction: column;
+    gap: 6px;
+    text-align: center;
+  }
+  
+  .breakdown-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .breakdown-content {
+    align-self: stretch;
+  }
+  
+  .comparison-items {
+    flex-direction: column;
+    gap: 6px;
+  }
+  
+  .comparison-item {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 400px) {
+  .metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+  
+  .metric-card {
+    padding: 6px;
+  }
+  
+  .metric-icon {
+    font-size: 14px;
+  }
+  
+  .metric-value {
+    font-size: 12px;
+  }
+}

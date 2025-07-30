@@ -1,0 +1,400 @@
+/**
+ * Memory Insights Styles
+ * Windows XP styling for memory analytics display
+ */
+
+.memory-insights {
+  font-family: 'Tahoma', sans-serif;
+  font-size: 11px;
+  color: #000;
+}
+
+.insights-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 0;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 12px;
+}
+
+.insights-header h4 {
+  margin: 0;
+  font-size: 11px;
+  font-weight: bold;
+  color: #000;
+}
+
+.project-info {
+  font-size: 10px;
+  color: #666;
+}
+
+.insights-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.insight-card {
+  background: #fff;
+  border: 2px outset #f0f0f0;
+  padding: 8px;
+}
+
+.insight-card.full-width {
+  grid-column: 1 / -1;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.card-icon {
+  font-size: 14px;
+}
+
+.card-header h5 {
+  margin: 0;
+  font-size: 10px;
+  font-weight: bold;
+  color: #333;
+  text-transform: uppercase;
+}
+
+.card-content {
+  font-size: 10px;
+}
+
+/* System Health Card */
+.health-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.status-indicator {
+  font-size: 12px;
+}
+
+.health-status.success .status-indicator {
+  color: #00aa00;
+}
+
+.health-status.error .status-indicator {
+  color: #cc0000;
+}
+
+.health-status.warning .status-indicator {
+  color: #ff8800;
+}
+
+.health-details {
+  background: #f8f8f8;
+  border: 1px inset #f0f0f0;
+  padding: 4px;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 2px 0;
+}
+
+.detail-item .label {
+  color: #666;
+}
+
+.detail-item .value {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Learning Progress Card */
+.progress-bar {
+  position: relative;
+  background: #e0e0e0;
+  border: 1px inset #f0f0f0;
+  height: 20px;
+  margin-bottom: 8px;
+}
+
+.progress-fill {
+  background: linear-gradient(to right, #0078d4 0%, #106ebe 100%);
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 9px;
+  font-weight: bold;
+  color: #000;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, 0.8);
+}
+
+.learning-breakdown {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 4px;
+}
+
+.breakdown-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px;
+  background: #f8f8f8;
+  border: 1px inset #f0f0f0;
+}
+
+.breakdown-item .label {
+  font-size: 9px;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.breakdown-item .value {
+  font-weight: bold;
+  color: #333;
+}
+
+/* Performance Card */
+.performance-rating {
+  text-align: center;
+  padding: 8px;
+  margin-bottom: 8px;
+  font-weight: bold;
+  border: 2px solid;
+}
+
+.performance-rating.rating-excellent {
+  background: #d4edda;
+  color: #155724;
+  border-color: #c3e6cb;
+}
+
+.performance-rating.rating-good {
+  background: #d1ecf1;
+  color: #0c5460;
+  border-color: #bee5eb;
+}
+
+.performance-rating.rating-fair {
+  background: #fff3cd;
+  color: #856404;
+  border-color: #ffeaa7;
+}
+
+.performance-rating.rating-needs-improvement {
+  background: #f8d7da;
+  color: #721c24;
+  border-color: #f5c6cb;
+}
+
+.performance-metrics {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4px;
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 4px;
+  background: #f8f8f8;
+  border: 1px inset #f0f0f0;
+}
+
+.metric-item .label {
+  font-size: 9px;
+  color: #666;
+  margin-bottom: 2px;
+}
+
+.metric-item .value {
+  font-weight: bold;
+  color: #333;
+  font-family: 'Courier New', monospace;
+}
+
+/* Context Quality Card */
+.context-score {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.score-circle {
+  width: 60px;
+  height: 60px;
+  border: 3px solid #0078d4;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #f8f8f8;
+}
+
+.score-value {
+  font-size: 16px;
+  font-weight: bold;
+  color: #0078d4;
+  line-height: 1;
+}
+
+.score-unit {
+  font-size: 8px;
+  color: #666;
+}
+
+.context-breakdown {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+}
+
+/* Usage Statistics Card */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  background: #f8f8f8;
+  border: 1px inset #f0f0f0;
+}
+
+.stat-value {
+  font-size: 16px;
+  font-weight: bold;
+  color: #0078d4;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 9px;
+  color: #666;
+  text-align: center;
+  line-height: 1.2;
+}
+
+/* Recommendations Card */
+.recommendations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.recommendation {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 6px;
+  background: #f8f8f8;
+  border: 1px inset #f0f0f0;
+}
+
+.recommendation.success {
+  background: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.rec-icon {
+  font-size: 12px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.rec-text {
+  font-size: 10px;
+  line-height: 1.3;
+  color: #333;
+}
+
+.recommendation.success .rec-text {
+  color: #155724;
+}
+
+/* Loading State */
+.loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  text-align: center;
+  color: #666;
+}
+
+.loading-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+  opacity: 0.5;
+}
+
+.loading-message {
+  font-size: 11px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .insights-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .learning-breakdown,
+  .performance-metrics {
+    grid-template-columns: 1fr;
+  }
+  
+  .context-breakdown {
+    grid-template-columns: 1fr;
+  }
+  
+  .insights-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .score-circle {
+    width: 50px;
+    height: 50px;
+  }
+  
+  .score-value {
+    font-size: 14px;
+  }
+  
+  .stat-value {
+    font-size: 14px;
+  }
+}

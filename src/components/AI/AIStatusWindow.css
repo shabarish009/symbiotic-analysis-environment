@@ -1,0 +1,215 @@
+/**
+ * AI Status Window Styles
+ * XP-themed styling for the AI engine status window
+ */
+
+.ai-status-window {
+  min-width: 400px;
+  max-width: 500px;
+}
+
+.ai-status-content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ai-status-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.ai-status-icon {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.ai-status-icon--loading {
+  background: #e6f2ff;
+  color: #0066cc;
+  border: 1px solid #0066cc;
+}
+
+.ai-status-icon--ready {
+  background: #e6ffe6;
+  color: #008000;
+  border: 1px solid #008000;
+}
+
+.ai-status-icon--error {
+  background: #ffe6e6;
+  color: #cc0000;
+  border: 1px solid #cc0000;
+}
+
+.ai-status-icon--stopped {
+  background: #f0f0f0;
+  color: #808080;
+  border: 1px solid #808080;
+}
+
+.ai-status-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #e6f2ff;
+  border-top: 2px solid #0066cc;
+  border-radius: 50%;
+  animation: ai-status-spin 1s linear infinite;
+}
+
+@keyframes ai-status-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.ai-status-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.ai-status-text h3 {
+  margin: 0 0 8px 0;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+}
+
+.ai-status-message {
+  margin: 0 0 4px 0;
+  font-size: 11px;
+  color: var(--xp-color-text-primary, #000000);
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  line-height: 1.4;
+  word-wrap: break-word;
+}
+
+.ai-status-timestamp {
+  margin: 0;
+  font-size: 10px;
+  color: var(--xp-color-text-secondary, #666666);
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-style: italic;
+}
+
+.ai-status-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+}
+
+.ai-status-actions .xp-button {
+  min-width: 80px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .ai-status-icon--loading {
+    background: ButtonFace;
+    color: ButtonText;
+    border-color: ButtonText;
+  }
+  
+  .ai-status-icon--ready {
+    background: ButtonFace;
+    color: ButtonText;
+    border-color: ButtonText;
+  }
+  
+  .ai-status-icon--error {
+    background: ButtonFace;
+    color: ButtonText;
+    border-color: ButtonText;
+  }
+  
+  .ai-status-icon--stopped {
+    background: ButtonFace;
+    color: ButtonText;
+    border-color: ButtonText;
+  }
+  
+  .ai-status-spinner {
+    border-color: ButtonText;
+    border-top-color: ButtonFace;
+  }
+  
+  .ai-status-text h3,
+  .ai-status-message,
+  .ai-status-timestamp {
+    color: ButtonText !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .ai-status-spinner {
+    animation: none;
+  }
+  
+  .ai-status-spinner::after {
+    content: '⟳';
+    display: block;
+    text-align: center;
+    line-height: 12px;
+    font-size: 12px;
+  }
+}
+
+/* Focus management for accessibility */
+.ai-status-window .xp-button:focus {
+  outline: 2px solid var(--xp-color-interactive-focus, #316ac5);
+  outline-offset: 2px;
+}
+
+/* Screen reader support */
+.ai-status-content[aria-live="polite"] {
+  /* Ensure status updates are announced */
+}
+
+/* Loading state animation */
+.ai-status-icon--loading .ai-status-spinner {
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* Error state styling */
+.ai-status-window[data-status="error"] .ai-status-content {
+  border-left: 4px solid #cc0000;
+  padding-left: 20px;
+}
+
+/* Ready state styling */
+.ai-status-window[data-status="ready"] .ai-status-content {
+  border-left: 4px solid #008000;
+  padding-left: 20px;
+}
+
+/* Responsive design for smaller screens */
+@media (max-width: 480px) {
+  .ai-status-window {
+    min-width: 300px;
+    max-width: 90vw;
+  }
+  
+  .ai-status-content {
+    padding: 12px;
+  }
+  
+  .ai-status-actions {
+    flex-direction: column;
+  }
+  
+  .ai-status-actions .xp-button {
+    width: 100%;
+  }
+}

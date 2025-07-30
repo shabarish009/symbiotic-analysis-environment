@@ -1,0 +1,120 @@
+Project Brief: Symbiotic Analysis Environment
+
+Version: 1.0
+Date: July 27, 2025
+Author: Mary, Business Analyst
+Part 1: Current Status & Handoff
+
+Current Status:
+This Project Brief is the finalized output of an intensive brainstorming and strategic planning session. The initial concept has been refined into a comprehensive "Grand Vision" for a new type of data analysis tool. The project has moved from the ideation phase to the formal planning phase.
+
+Next Immediate Action:
+The next step is to create the detailed Product Requirements Document (PRD). This brief serves as the official handover to the Product Manager (PM) agent, "John."
+
+Handoff Prompt for Product Manager:
+
+    Subject: Project Kickoff - Symbiotic Analysis Environment
+
+    John,
+
+    Attached is the completed Project Brief for a new greenfield application: the "Symbiotic Analysis Environment." This document contains the full context, from the high-level vision to a detailed, phased implementation roadmap.
+
+    Key strategic decisions to note:
+
+        The Vision: We are building the "Grand Vision," not a minimal PoC. The timeline has been adjusted to a realistic multi-month roadmap.
+
+        The Focus: The product is a niche, power-user tool for the individual data artisan. We have intentionally removed team/corporate features from the initial scope.
+
+        The Architecture: The plan is for a local-first, open-source desktop app using Tauri and a Python backend to run local LLMs.
+
+        The Roadmap: Your focus for the PRD will be to detail Phase 1: The Core Engine & The Killer App. This includes the XP Shell, the AI Core (Consensus Engine & Project Cortex), and a fully-featured SQL Analyst sub-app.
+
+    Please initiate the create-prd task. Review this brief thoroughly and work with the user to create the PRD section by section, using our phased roadmap to define the epics and stories.
+
+Part 2: The Grand Vision Blueprint
+
+1. Guiding Philosophy:
+Our goal is to create a "Symbiotic Analysis Environment." This is not a passive tool, but an active, intelligent partner that learns, advises, and collaborates. It's designed to create a "flow state" for the analyst, amplifying their intellect and creativity.
+
+2. Foundational Architecture (The "How"):
+
+    A Local-First, Open-Source Desktop App: Guarantees privacy, zero running costs, and high performance. It will be built with a modern, secure shell (Tauri) and a powerful AI backend (Python).
+
+    The AI Core - The Consensus Engine & Project Cortex: This is the heart of the AI. It uses a team of specialized AI models to cross-validate results, eliminating hallucinations and ensuring trust. The Project Cortex acts as its personalized, project-specific memory, learning your data and style to become progressively smarter.
+
+3. Pillars of Trust & Growth (The "Guarantees"):
+
+    The Guardrails System: A non-negotiable safety layer. It will include Cost Pre-Flight Checks to prevent dangerous queries, a PII Shield to protect sensitive data, and Permission Emulation to respect database security.
+
+    The Living Model Architecture: The system is designed to improve over time. It will feature a Self-Healing Fine-Tuning Loop that uses your corrections to automatically create better, personalized AI models, and will support Community Model Federation to improve the public models for everyone.
+
+4. The User Experience (The "Feel"):
+
+    The Authentic XP Shell & Collaborative Intelligence Canvas: The UI is a unique, memorable, and interactive workspace. The desktop is a living canvas where you can directly manipulate and connect your analyses.
+
+    Multi-Modal & Transparent Interaction: You can interact via text, voice, and direct manipulation. The AI's "thought process" is made visible, building trust and turning the system into a learning tool.
+
+5. The Complete Arsenal (The "What"):
+This is the full suite of interconnected tools that serve everyone from a Junior Analyst to a CTO/CDO. They are all powered by the Reactive Dataflow Engine for a seamless, real-time workflow.
+
+    SQL Analyst
+
+    Excel & Flat File Analyst
+
+    Data Cleanser
+
+    Dashboard Creator (using a best-in-class library like ECharts/Plotly)
+
+    Python Notebook
+
+    Hypothesis Tester
+
+    Metric Tree Builder
+
+    Insight Narrator
+
+6. The Social Fabric (The "Scale"):
+
+    The Collaboration Framework: To expand from a solo tool to a team platform, it will include the Shareable Cortex and "Golden Snippets" for lightweight, practical data governance.
+
+Part 3: Phased Implementation Roadmap
+
+This grand vision will be built sustainably in four logical phases:
+
+    Phase 1: The Core Engine & The Killer App (Months 1-3)
+
+        Focus: Build the foundation and prove the "magic."
+
+        Deliverables: The XP Shell, the Consensus Engine, the Project Cortex, and a fully-featured SQL Analyst app.
+
+    Phase 2: The Core Workbench (Months 4-6)
+
+        Focus: Fulfill the promise of a complete arsenal for the solo analyst.
+
+        Deliverables: Add the Excel Analyst, Data Cleanser, and Dashboard Creator.
+
+    Phase 3: The Strategic Layer (Months 7-9)
+
+        Focus: Deliver the "CTO-level" proactive and advisory capabilities.
+
+        Deliverables: Add the Python Notebook, Hypothesis Tester, Metric Tree Builder, and Insight Narrator.
+
+    Phase 4: The Team & Enterprise Layer (Months 10-12)
+
+        Focus: Expand from a personal tool to a team platform.
+
+        Deliverables: Implement the Collaboration Framework and the Guardrails System.
+
+Part 4: Core Project Details
+
+    Problem Statement: Today's data analysis workflow is fragmented, inefficient, and costly, forcing analysts to be tool-wranglers instead of strategic thinkers. Existing solutions are either too expensive, too complex, or lack the intelligence to be a true partner.
+
+    Proposed Solution: A free, open-source, local-first desktop application that unifies the entire analysis workflow in a symbiotic, AI-powered environment, presented within an authentic Windows XP shell.
+
+    Target User (Initial Focus): "The Frustrated Data Artisan" - A skilled data professional who values powerful, efficient tools and is frustrated by the fragmentation and limitations of the current market.
+
+    Technical Considerations: A cross-platform desktop application built with Tauri (Rust backend) and a modern web frontend (React/Vue/Svelte). The AI engine will be a separate, embedded Python process.
+
+    Constraints: This is a solo-developer, open-source project with a zero-dollar budget, following the phased roadmap.
+
+    Risks: Key risks include the technical challenge of local LLM performance, solo-developer burnout, and the niche appeal of the UI. These are mitigated by the phased roadmap and a modular, "pluggable AI core" architecture.

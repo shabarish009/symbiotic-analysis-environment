@@ -1,0 +1,150 @@
+/**
+ * XP Dialog Styles
+ * Authentic Windows XP dialog/modal styling
+ */
+
+.xp-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+  padding: 20px;
+}
+
+.xp-dialog {
+  background: var(--xp-color-gray-silver, #ece9d8);
+  border: 2px solid var(--xp-color-gray-medium, #c0c0c0);
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.8) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.2) inset,
+    4px 4px 8px rgba(0, 0, 0, 0.3);
+  min-width: 300px;
+  max-width: 90vw;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-normal, 10.67px);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.xp-dialog-header {
+  background: linear-gradient(
+    to bottom,
+    var(--xp-color-primary-blueLight, #4a90e2),
+    var(--xp-color-primary-blueDark, #0054e3)
+  );
+  color: var(--xp-color-text-onBlue, #ffffff);
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  font-weight: bold;
+}
+
+.xp-dialog-title {
+  flex: 1;
+  margin: 0;
+  font-size: var(--xp-font-size-normal, 10.67px);
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.xp-dialog-close {
+  width: 21px;
+  height: 21px;
+  background: linear-gradient(
+    to bottom,
+    var(--xp-color-gray-light, #f0f0f0),
+    #d0d0d0
+  );
+  border: 1px solid var(--xp-color-gray-medium, #c0c0c0);
+  color: var(--xp-color-text-primary, #000000);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.8) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.2) inset;
+}
+
+.xp-dialog-close:hover {
+  background: linear-gradient(to bottom, #ff6b6b, #e74c3c);
+  color: var(--xp-color-base-white, #ffffff);
+}
+
+.xp-dialog-close:active {
+  background: linear-gradient(
+    to bottom,
+    #d0d0d0,
+    var(--xp-color-gray-light, #f0f0f0)
+  );
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset;
+}
+
+.xp-dialog-close:focus {
+  outline: 1px dotted var(--xp-color-text-primary, #000000);
+  outline-offset: -2px;
+}
+
+.xp-dialog-content {
+  padding: 16px;
+  background: var(--xp-color-base-white, #ffffff);
+  flex: 1;
+  overflow: auto;
+  color: var(--xp-color-text-primary, #000000);
+  user-select: text;
+  -webkit-user-select: text;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .xp-dialog-overlay {
+    background: rgba(0, 0, 0, 0.8);
+  }
+
+  .xp-dialog {
+    background: Canvas;
+    border-color: CanvasText;
+  }
+
+  .xp-dialog-header {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .xp-dialog-close {
+    background: ButtonFace;
+    color: ButtonText;
+    border-color: ButtonText;
+  }
+
+  .xp-dialog-close:hover {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .xp-dialog-content {
+    background: Canvas;
+    color: CanvasText;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .xp-dialog-close {
+    transition: none;
+  }
+}

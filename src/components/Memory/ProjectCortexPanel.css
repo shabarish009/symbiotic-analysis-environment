@@ -1,0 +1,316 @@
+/**
+ * Project Cortex Panel Styles
+ * Authentic Windows XP styling for the memory system UI
+ */
+
+.project-cortex-panel {
+  background: #f0f0f0;
+  border: 2px outset #f0f0f0;
+  border-radius: 0;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 11px;
+  margin: 4px 0;
+  box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.cortex-header {
+  background: linear-gradient(to bottom, #0078d4 0%, #106ebe 100%);
+  color: white;
+  padding: 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccc;
+  min-height: 20px;
+}
+
+.cortex-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex: 1;
+}
+
+.cortex-icon {
+  font-size: 14px;
+}
+
+.cortex-title h3 {
+  margin: 0;
+  font-size: 11px;
+  font-weight: bold;
+  color: white;
+}
+
+.cortex-status {
+  margin-left: 8px;
+}
+
+.status-indicator {
+  font-size: 10px;
+  margin-left: 4px;
+}
+
+.status-indicator.success {
+  color: #00ff00;
+}
+
+.status-indicator.failed,
+.status-indicator.corrupted {
+  color: #ff4444;
+}
+
+.status-indicator.partial,
+.status-indicator.recovering {
+  color: #ffaa00;
+}
+
+.cortex-stats {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font-size: 10px;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.stat-label {
+  color: #e0e0e0;
+}
+
+.stat-value {
+  color: white;
+  font-weight: bold;
+}
+
+.toggle-button {
+  background: #e0e0e0;
+  border: 1px outset #e0e0e0;
+  color: #000;
+  font-size: 10px;
+  padding: 2px 6px;
+  cursor: pointer;
+  min-width: 20px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-button:hover {
+  background: #f0f0f0;
+}
+
+.toggle-button:active {
+  border: 1px inset #e0e0e0;
+}
+
+.cortex-content {
+  background: #f0f0f0;
+  border-top: 1px solid #ccc;
+}
+
+.cortex-tabs {
+  background: #e0e0e0;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  padding: 2px;
+  gap: 1px;
+}
+
+.tab-button {
+  background: #e0e0e0;
+  border: 1px outset #e0e0e0;
+  color: #000;
+  font-size: 10px;
+  padding: 4px 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 20px;
+  border-radius: 0;
+}
+
+.tab-button:hover {
+  background: #f0f0f0;
+}
+
+.tab-button.active {
+  background: #f0f0f0;
+  border: 1px inset #e0e0e0;
+  font-weight: bold;
+}
+
+.tab-icon {
+  font-size: 11px;
+}
+
+.cortex-tab-content {
+  padding: 8px;
+  background: #f0f0f0;
+  min-height: 200px;
+  max-height: 400px;
+  overflow-y: auto;
+  border: 1px inset #f0f0f0;
+}
+
+/* Loading and Error States */
+.cortex-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: #666;
+}
+
+.loading-spinner {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #e0e0e0;
+  border-top: 2px solid #0078d4;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.cortex-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #666;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 24px;
+  margin-bottom: 8px;
+  color: #ff4444;
+}
+
+.error-message {
+  margin-bottom: 12px;
+  font-size: 11px;
+}
+
+.error-message strong {
+  color: #ff4444;
+}
+
+.retry-button {
+  background: #e0e0e0;
+  border: 1px outset #e0e0e0;
+  color: #000;
+  font-size: 10px;
+  padding: 4px 12px;
+  cursor: pointer;
+  border-radius: 0;
+}
+
+.retry-button:hover {
+  background: #f0f0f0;
+}
+
+.retry-button:active {
+  border: 1px inset #e0e0e0;
+}
+
+/* Scrollbar styling for XP look */
+.cortex-tab-content::-webkit-scrollbar {
+  width: 16px;
+}
+
+.cortex-tab-content::-webkit-scrollbar-track {
+  background: #f0f0f0;
+  border: 1px inset #f0f0f0;
+}
+
+.cortex-tab-content::-webkit-scrollbar-thumb {
+  background: #c0c0c0;
+  border: 1px outset #c0c0c0;
+}
+
+.cortex-tab-content::-webkit-scrollbar-thumb:hover {
+  background: #a0a0a0;
+}
+
+.cortex-tab-content::-webkit-scrollbar-button {
+  background: #e0e0e0;
+  border: 1px outset #e0e0e0;
+  height: 16px;
+}
+
+.cortex-tab-content::-webkit-scrollbar-button:hover {
+  background: #f0f0f0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .cortex-stats {
+    display: none;
+  }
+  
+  .cortex-header {
+    padding: 4px;
+  }
+  
+  .tab-button {
+    padding: 4px 6px;
+    font-size: 9px;
+  }
+  
+  .tab-icon {
+    display: none;
+  }
+  
+  .cortex-tab-content {
+    max-height: 300px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .project-cortex-panel {
+    border: 2px solid #000;
+  }
+  
+  .cortex-header {
+    background: #000;
+    color: #fff;
+    border-bottom: 2px solid #000;
+  }
+  
+  .tab-button {
+    border: 2px solid #000;
+  }
+  
+  .tab-button.active {
+    background: #000;
+    color: #fff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner {
+    animation: none;
+  }
+  
+  .tab-button,
+  .toggle-button,
+  .retry-button {
+    transition: none;
+  }
+}

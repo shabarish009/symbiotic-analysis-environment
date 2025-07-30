@@ -1,0 +1,193 @@
+/**
+ * XP Property Dialog Styles
+ * Authentic Windows XP property dialog styling
+ */
+
+.xp-property-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  animation: xp-property-dialog-overlay-appear 200ms ease-out;
+}
+
+.xp-property-dialog {
+  background: var(--xp-color-gray-light, #f0f0f0);
+  border: 2px solid var(--xp-color-gray-medium, #c0c0c0);
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.8) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.2) inset,
+    4px 4px 8px rgba(0, 0, 0, 0.3);
+  width: 400px;
+  max-width: 90vw;
+  max-height: 80vh;
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-normal, 10.67px);
+  animation: xp-property-dialog-appear 200ms ease-out;
+  display: flex;
+  flex-direction: column;
+}
+
+.xp-property-dialog-header {
+  background: linear-gradient(
+    to bottom,
+    var(--xp-color-primary-blueLight, #4a90e2),
+    var(--xp-color-primary-blueDark, #0054e3)
+  );
+  color: var(--xp-color-text-onBlue, #ffffff);
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--xp-color-primary-blueDark, #0054e3);
+}
+
+.xp-property-dialog-title {
+  margin: 0;
+  font-size: var(--xp-font-size-normal, 10.67px);
+  font-weight: bold;
+}
+
+.xp-property-dialog-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+.xp-property-tabs {
+  display: flex;
+  background: var(--xp-color-gray-light, #f0f0f0);
+  border-bottom: 1px solid var(--xp-color-gray-medium, #c0c0c0);
+  padding: 0 4px;
+}
+
+.xp-property-tab {
+  background: var(--xp-color-gray-light, #f0f0f0);
+  border: 1px solid var(--xp-color-gray-medium, #c0c0c0);
+  border-bottom: none;
+  color: var(--xp-color-text-primary, #000000);
+  padding: 6px 12px;
+  margin: 2px 1px 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  position: relative;
+  border-radius: 0;
+}
+
+.xp-property-tab:hover:not(:disabled) {
+  background: var(--xp-color-interactive-hover, #e6f2ff);
+}
+
+.xp-property-tab--active {
+  background: var(--xp-color-base-white, #ffffff);
+  border-bottom: 1px solid var(--xp-color-base-white, #ffffff);
+  margin-bottom: -1px;
+  z-index: 1;
+}
+
+.xp-property-tab--disabled {
+  color: var(--xp-color-text-disabled, #808080);
+  cursor: not-allowed;
+}
+
+.xp-property-tab:focus {
+  outline: 1px dotted var(--xp-color-text-primary, #000000);
+  outline-offset: -3px;
+}
+
+.xp-property-content {
+  flex: 1;
+  background: var(--xp-color-base-white, #ffffff);
+  padding: 16px;
+  overflow-y: auto;
+  min-height: 200px;
+}
+
+.xp-property-dialog-footer {
+  background: var(--xp-color-gray-silver, #ece9d8);
+  border-top: 1px solid var(--xp-color-gray-medium, #c0c0c0);
+  padding: 12px 16px;
+}
+
+.xp-property-dialog-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* Animations */
+@keyframes xp-property-dialog-overlay-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes xp-property-dialog-appear {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .xp-property-dialog {
+    background: Canvas;
+    border-color: CanvasText;
+  }
+
+  .xp-property-dialog-header {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .xp-property-tabs {
+    background: Canvas;
+    border-color: CanvasText;
+  }
+
+  .xp-property-tab {
+    background: Canvas;
+    color: CanvasText;
+    border-color: CanvasText;
+  }
+
+  .xp-property-tab:hover:not(:disabled) {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .xp-property-tab--active {
+    background: Canvas;
+  }
+
+  .xp-property-content {
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .xp-property-dialog-footer {
+    background: Canvas;
+    border-color: CanvasText;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .xp-property-dialog-overlay,
+  .xp-property-dialog {
+    animation: none;
+  }
+}

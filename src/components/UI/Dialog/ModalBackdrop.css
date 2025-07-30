@@ -1,0 +1,35 @@
+/**
+ * XP Modal Backdrop Styles
+ * Reusable backdrop styling for modal dialogs
+ */
+
+.xp-modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  animation: xp-modal-backdrop-appear 200ms ease-out;
+}
+
+/* Animation */
+@keyframes xp-modal-backdrop-appear {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .xp-modal-backdrop {
+    animation: none;
+  }
+}

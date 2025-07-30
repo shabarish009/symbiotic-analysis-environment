@@ -1,0 +1,78 @@
+/**
+ * XP Button Group Styles
+ * Authentic Windows XP button group styling
+ */
+
+.xp-button-group {
+  display: inline-flex;
+  position: relative;
+}
+
+.xp-button-group--horizontal {
+  flex-direction: row;
+}
+
+.xp-button-group--vertical {
+  flex-direction: column;
+}
+
+/* Remove borders between buttons */
+.xp-button-group--horizontal .xp-button:not(:first-child) {
+  border-left: none;
+  margin-left: -1px;
+}
+
+.xp-button-group--vertical .xp-button:not(:first-child) {
+  border-top: none;
+  margin-top: -1px;
+}
+
+/* Ensure proper z-index for hover states */
+.xp-button-group .xp-button:hover {
+  position: relative;
+  z-index: 1;
+}
+
+.xp-button-group .xp-button:active {
+  z-index: 2;
+}
+
+/* Toolbar variant */
+.xp-button-group--toolbar {
+  background: transparent;
+  border: none;
+  gap: 1px;
+}
+
+.xp-button-group--toolbar .xp-button {
+  border-radius: 0;
+}
+
+/* Size variants */
+.xp-button-group--small .xp-button {
+  height: 20px;
+  font-size: var(--xp-font-size-small, 10.67px);
+}
+
+.xp-button-group--medium .xp-button {
+  height: 24px;
+  font-size: var(--xp-font-size-normal, 10.67px);
+}
+
+.xp-button-group--large .xp-button {
+  height: 28px;
+  font-size: var(--xp-font-size-large, 12px);
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .xp-button-group .xp-button {
+    border-color: ButtonText;
+  }
+}
+
+/* Focus management */
+.xp-button-group .xp-button:focus {
+  position: relative;
+  z-index: 3;
+}

@@ -1,0 +1,206 @@
+/**
+ * Taskbar Styles
+ * Authentic Windows XP taskbar styling
+ */
+
+.taskbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 30px;
+  background: linear-gradient(
+    to bottom,
+    var(--xp-color-primary-blue, #245edc),
+    #1e4fbf
+  );
+  border-top: 1px solid var(--xp-color-primary-blueLight, #4a90e2);
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+  z-index: 1000;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Start Button */
+.start-button {
+  height: 24px;
+  min-width: 60px;
+  background: linear-gradient(to bottom, #73b441, #5a9a2d);
+  border: 1px solid #4a7a1f;
+  border-radius: 3px;
+  color: var(--xp-color-base-white, #ffffff);
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-normal, 10.67px);
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  cursor: pointer;
+  margin-right: 8px;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.3) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.3) inset;
+}
+
+.start-button:hover {
+  background: linear-gradient(to bottom, #7fc045, #6ba431);
+}
+
+.start-button:active {
+  background: linear-gradient(to bottom, #5a9a2d, #73b441);
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.3) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.3) inset;
+}
+
+.start-button:focus {
+  outline: 1px dotted var(--xp-color-base-white, #ffffff);
+  outline-offset: -2px;
+}
+
+.start-button-icon {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.start-button-text {
+  font-weight: bold;
+}
+
+/* Task Buttons Container */
+.task-buttons {
+  flex: 1;
+  display: flex;
+  gap: 2px;
+  overflow: hidden;
+  margin-right: 8px;
+}
+
+/* Task Button */
+.task-button {
+  height: 22px;
+  min-width: 120px;
+  max-width: 160px;
+  background: linear-gradient(
+    to bottom,
+    var(--xp-color-gray-light, #f0f0f0),
+    #d8d8d8
+  );
+  border: 1px solid var(--xp-color-gray-medium, #c0c0c0);
+  color: var(--xp-color-text-primary, #000000);
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-normal, 10.67px);
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 8px;
+  cursor: pointer;
+  box-shadow:
+    1px 1px 0 rgba(255, 255, 255, 0.8) inset,
+    -1px -1px 0 rgba(0, 0, 0, 0.2) inset;
+}
+
+.task-button:hover {
+  background: linear-gradient(to bottom, #e6f2ff, #cce5ff);
+  border-color: var(--xp-color-primary-blueAccent, #316ac5);
+}
+
+.task-button.active {
+  background: linear-gradient(
+    to bottom,
+    #d8d8d8,
+    var(--xp-color-gray-light, #f0f0f0)
+  );
+  box-shadow:
+    -1px -1px 0 rgba(255, 255, 255, 0.8) inset,
+    1px 1px 0 rgba(0, 0, 0, 0.2) inset;
+  border-color: var(--xp-color-gray-dark, #808080);
+}
+
+.task-button.minimized {
+  font-style: italic;
+  opacity: 0.8;
+}
+
+.task-button:focus {
+  outline: 1px dotted var(--xp-color-text-primary, #000000);
+  outline-offset: -2px;
+}
+
+.task-button-icon {
+  width: 16px;
+  height: 16px;
+  object-fit: contain;
+}
+
+.task-button-text {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-align: left;
+}
+
+/* System Tray */
+.system-tray {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 0 4px;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 2px;
+  height: 20px;
+}
+
+.system-clock {
+  color: var(--xp-color-base-white, #ffffff);
+  font-family: var(--xp-font-family-ui, 'Tahoma', sans-serif);
+  font-size: var(--xp-font-size-normal, 10.67px);
+  padding: 0 4px;
+  min-width: 50px;
+  text-align: center;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .taskbar {
+    background: ButtonFace;
+    border-top: 1px solid ButtonText;
+  }
+
+  .start-button {
+    background: ButtonFace;
+    color: ButtonText;
+    border: 1px solid ButtonText;
+  }
+
+  .task-button {
+    background: ButtonFace;
+    color: ButtonText;
+    border: 1px solid ButtonText;
+  }
+
+  .task-button.active {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .system-clock {
+    color: ButtonText;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .start-button,
+  .task-button {
+    transition: none;
+  }
+}
