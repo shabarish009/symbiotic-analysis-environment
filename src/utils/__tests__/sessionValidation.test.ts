@@ -314,9 +314,9 @@ describe('Session Validation Utilities', () => {
   });
 
   describe('generateSessionChecksum', () => {
-    it('should generate consistent checksums for identical data', () => {
-      const checksum1 = generateSessionChecksum(validSessionData);
-      const checksum2 = generateSessionChecksum(validSessionData);
+    it('should generate consistent checksums for identical data', async () => {
+      const checksum1 = await generateSessionChecksum(validSessionData);
+      const checksum2 = await generateSessionChecksum(validSessionData);
 
       expect(checksum1).toBe(checksum2);
       expect(typeof checksum1).toBe('string');
@@ -335,7 +335,7 @@ describe('Session Validation Utilities', () => {
       expect(checksum1).not.toBe(checksum2);
     });
 
-    it('should generate checksums regardless of property order', () => {
+    it('should generate checksums regardless of property order', async () => {
       const reorderedData = {
         settings: validSessionData.settings,
         desktop: validSessionData.desktop,
@@ -344,8 +344,8 @@ describe('Session Validation Utilities', () => {
         version: validSessionData.version,
       };
 
-      const checksum1 = generateSessionChecksum(validSessionData);
-      const checksum2 = generateSessionChecksum(reorderedData as SessionData);
+      const checksum1 = await generateSessionChecksum(validSessionData);
+      const checksum2 = await generateSessionChecksum(reorderedData as SessionData);
 
       expect(checksum1).toBe(checksum2);
     });

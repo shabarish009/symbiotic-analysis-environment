@@ -15,11 +15,11 @@ expect.extend(toHaveNoViolations);
 
 describe('Button Components Accessibility', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('Button Component', () => {
-    const mockOnClick = jest.fn();
+    const mockOnClick = vi.fn();
 
     it('should pass axe accessibility tests', async () => {
       const { container } = render(<Button onClick={mockOnClick}>Test Button</Button>);

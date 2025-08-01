@@ -41,14 +41,14 @@ describe('Taskbar Accessibility', () => {
 
   const defaultProps = {
     items: mockItems,
-    onStartClick: jest.fn(),
-    onItemClick: jest.fn(),
+    onStartClick: vi.fn(),
+    onItemClick: vi.fn(),
     showClock: true,
     currentTime: new Date('2023-12-25T10:30:00'),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('WCAG AA Compliance', () => {
@@ -68,7 +68,7 @@ describe('Taskbar Accessibility', () => {
     it('should have proper semantic structure', () => {
       render(<Taskbar {...defaultProps} />);
       
-      const taskbar = screen.getByRole('toolbar');
+      const taskbar = screen.getByRole('navigation');
       expect(taskbar).toBeInTheDocument();
       expect(taskbar).toHaveAttribute('aria-label', 'Taskbar');
     });
@@ -316,7 +316,7 @@ describe('Taskbar Accessibility', () => {
       // Simulate high contrast mode
       container.classList.add('high-contrast-mode');
       
-      const taskbar = screen.getByRole('toolbar');
+      const taskbar = screen.getByRole('navigation');
       const styles = window.getComputedStyle(taskbar);
       
       expect(styles.backgroundColor).not.toBe('transparent');
@@ -327,22 +327,22 @@ describe('Taskbar Accessibility', () => {
       // Mock prefers-reduced-motion
       Object.defineProperty(window, 'matchMedia', {
         writable: true,
-        value: jest.fn().mockImplementation(query => ({
+        value: vi.fn().mockImplementation(query => ({
           matches: query === '(prefers-reduced-motion: reduce)',
           media: query,
           onchange: null,
-          addListener: jest.fn(),
-          removeListener: jest.fn(),
-          addEventListener: jest.fn(),
-          removeEventListener: jest.fn(),
-          dispatchEvent: jest.fn(),
+          addListener: vi.fn(),
+          removeListener: vi.fn(),
+          addEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
+          dispatchEvent: vi.fn(),
         })),
       });
 
       const { container } = render(<Taskbar {...defaultProps} />);
       
       // Verify reduced motion styles are applied
-      const taskbar = screen.getByRole('toolbar');
+      const taskbar = screen.getByRole('navigation');
       taskbar.classList.add('reduce-motion');
       
       const styles = window.getComputedStyle(taskbar);

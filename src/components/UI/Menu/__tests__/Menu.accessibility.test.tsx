@@ -15,11 +15,11 @@ expect.extend(toHaveNoViolations);
 
 describe('Menu Components Accessibility', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('Menu and MenuItem Components', () => {
-    const mockOnClick = jest.fn();
+    const mockOnClick = vi.fn();
     const menuItems = [
       { id: 'new', label: 'New', shortcut: 'Ctrl+N', onClick: mockOnClick },
       { id: 'open', label: 'Open', shortcut: 'Ctrl+O', onClick: mockOnClick },

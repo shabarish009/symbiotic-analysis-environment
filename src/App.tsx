@@ -15,6 +15,8 @@ import {
 import { Button } from './components/UI';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { AIStatusWindow, useAIEngineStatus } from './components/AI';
+import { ConnectionManager } from './components/Database';
+import { SQLAnalystApp } from './components/SQLAnalyst';
 import { useWindowBounds } from './hooks/useWindowBounds';
 import { useSessionPersistence } from './hooks/useSessionPersistence';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
@@ -111,6 +113,22 @@ const App: React.FC = () => {
       isSelected: false,
       onDoubleClick: () => openAboutWindow(),
     },
+    {
+      id: 'database',
+      name: 'Database Connections',
+      icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><rect width="32" height="32" fill="%23228B22"/><ellipse cx="16" cy="10" rx="12" ry="4" fill="white"/><ellipse cx="16" cy="16" rx="12" ry="4" fill="white"/><ellipse cx="16" cy="22" rx="12" ry="4" fill="white"/></svg>',
+      position: { x: 32, y: 208 },
+      isSelected: false,
+      onDoubleClick: () => openConnectionManagerWindow(),
+    },
+    {
+      id: 'sql-analyst',
+      name: 'SQL Analyst',
+      icon: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><rect width="32" height="32" fill="%23000080"/><rect x="4" y="6" width="24" height="20" fill="white" stroke="%23000080" stroke-width="1"/><text x="16" y="12" text-anchor="middle" fill="%23000080" font-size="8" font-family="monospace">SQL</text><rect x="6" y="14" width="20" height="1" fill="%23000080"/><rect x="6" y="16" width="16" height="1" fill="%23000080"/><rect x="6" y="18" width="18" height="1" fill="%23000080"/><rect x="6" y="20" width="14" height="1" fill="%23000080"/></svg>',
+      position: { x: 32, y: 296 },
+      isSelected: false,
+      onDoubleClick: () => openSQLAnalystWindow(),
+    },
   ];
 
   // Sample taskbar items
@@ -133,6 +151,16 @@ const App: React.FC = () => {
       id: 'about',
       label: 'About',
       onClick: () => openAboutWindow(),
+    },
+    {
+      id: 'database',
+      label: 'Database Connections',
+      onClick: () => openConnectionManagerWindow(),
+    },
+    {
+      id: 'sql-analyst',
+      label: 'SQL Analyst',
+      onClick: () => openSQLAnalystWindow(),
     },
     {
       id: 'separator1',
@@ -165,6 +193,64 @@ const App: React.FC = () => {
     const cascadedPosition = getCascadedWindowPosition(existingWindows, template.defaultSize);
 
     const newWindow = windowManager.createWindow('about', cascadedPosition);
+
+    setWindows(prev =>
+      windowManager.updateZIndex([...prev, newWindow], newWindow.id)
+    );
+    setIsStartMenuOpen(false);
+  };
+
+  const openConnectionManagerWindow = () => {
+    // Check if Connection Manager is already open
+    const existingWindow = windows.find(w => w.id.includes('connection-manager'));
+    if (existingWindow) {
+      focusWindow(existingWindow.id);
+      setIsStartMenuOpen(false);
+      return;
+    }
+
+    const existingWindows = windows.map(w => ({ ...w.position, ...w.size }));
+    const cascadedPosition = getCascadedWindowPosition(existingWindows, { width: 800, height: 600 });
+
+    const newWindow: WindowState = {
+      id: `connection-manager-${Date.now()}`,
+      title: 'Database Connection Manager',
+      position: cascadedPosition,
+      size: { width: 800, height: 600 },
+      isMinimized: false,
+      isMaximized: false,
+      isActive: true,
+      zIndex: Math.max(...windows.map(w => w.zIndex), 0) + 1,
+    };
+
+    setWindows(prev =>
+      windowManager.updateZIndex([...prev, newWindow], newWindow.id)
+    );
+    setIsStartMenuOpen(false);
+  };
+
+  const openSQLAnalystWindow = () => {
+    // Check if SQL Analyst is already open
+    const existingWindow = windows.find(w => w.id.includes('sql-analyst'));
+    if (existingWindow) {
+      focusWindow(existingWindow.id);
+      setIsStartMenuOpen(false);
+      return;
+    }
+
+    const existingWindows = windows.map(w => ({ ...w.position, ...w.size }));
+    const cascadedPosition = getCascadedWindowPosition(existingWindows, { width: 1200, height: 800 });
+
+    const newWindow: WindowState = {
+      id: `sql-analyst-${Date.now()}`,
+      title: 'SQL Analyst',
+      position: cascadedPosition,
+      size: { width: 1200, height: 800 },
+      isMinimized: false,
+      isMaximized: false,
+      isActive: true,
+      zIndex: Math.max(...windows.map(w => w.zIndex), 0) + 1,
+    };
 
     setWindows(prev =>
       windowManager.updateZIndex([...prev, newWindow], newWindow.id)
@@ -348,6 +434,18 @@ const App: React.FC = () => {
                       </Button>
                     </div>
                   </div>
+                )}
+                {window.id.startsWith('connection-manager') && (
+                  <ConnectionManager
+                    onClose={() => closeWindow(window.id)}
+                    isVisible={true}
+                  />
+                )}
+                {window.id.startsWith('sql-analyst') && (
+                  <SQLAnalystApp
+                    onClose={() => closeWindow(window.id)}
+                    isVisible={true}
+                  />
                 )}
               </WindowFrame>
             ))}

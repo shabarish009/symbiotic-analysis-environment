@@ -201,9 +201,132 @@ class DatabaseManager:
             updated_at REAL DEFAULT (julianday('now'))
         );
         
+        -- User corrections table for learning system
+        CREATE TABLE IF NOT EXISTS user_corrections (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            session_id TEXT NOT NULL CHECK(length(session_id) <= 100),
+            query_id TEXT NOT NULL CHECK(length(query_id) <= 100),
+            project_id TEXT NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+            original_query TEXT NOT NULL CHECK(length(original_query) <= 10000),
+            corrected_query TEXT CHECK(corrected_query IS NULL OR length(corrected_query) <= 10000),
+            correction_type TEXT NOT NULL CHECK(correction_type IN ('edit', 'replacement', 'refinement', 'feedback', 'suggestion')),
+            feedback_score INTEGER CHECK(feedback_score IS NULL OR feedback_score BETWEEN -1 AND 1),
+            correction_reason TEXT CHECK(correction_reason IS NULL OR length(correction_reason) <= 1000),
+            context TEXT DEFAULT '{}' CHECK(json_valid(context)),
+            timestamp REAL DEFAULT (julianday('now')) NOT NULL,
+            applied BOOLEAN DEFAULT FALSE NOT NULL,
+            confidence REAL DEFAULT 0.0 CHECK(confidence BETWEEN 0.0 AND 1.0),
+            metadata TEXT DEFAULT '{}' CHECK(json_valid(metadata)),
+            created_at REAL DEFAULT (julianday('now')) NOT NULL,
+            updated_at REAL DEFAULT (julianday('now')) NOT NULL
+        );
+
+        -- Correction patterns table
+        CREATE TABLE IF NOT EXISTS correction_patterns (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            project_id TEXT NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+            pattern_type TEXT NOT NULL CHECK(pattern_type IN ('query_structure', 'terminology', 'conditions', 'joins', 'style', 'feedback')),
+            pattern_data TEXT NOT NULL CHECK(json_valid(pattern_data)),
+            source_corrections TEXT NOT NULL CHECK(json_valid(source_corrections)), -- JSON array of correction IDs
+            confidence REAL NOT NULL DEFAULT 0.0 CHECK(confidence BETWEEN 0.0 AND 1.0),
+            usage_count INTEGER DEFAULT 0 CHECK(usage_count >= 0),
+            success_rate REAL DEFAULT 0.0 CHECK(success_rate BETWEEN 0.0 AND 1.0),
+            created_at REAL DEFAULT (julianday('now')) NOT NULL,
+            last_applied REAL DEFAULT (julianday('now')) NOT NULL,
+            metadata TEXT DEFAULT '{}' CHECK(json_valid(metadata)),
+            is_active BOOLEAN DEFAULT TRUE NOT NULL,
+            version INTEGER DEFAULT 1 NOT NULL
+        );
+
+        -- Session learning cache table
+        CREATE TABLE IF NOT EXISTS session_learning (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            session_id TEXT NOT NULL CHECK(length(session_id) <= 100),
+            project_id TEXT NOT NULL REFERENCES projects(id) ON DELETE CASCADE,
+            learning_data TEXT NOT NULL CHECK(json_valid(learning_data)),
+            corrections_applied TEXT DEFAULT '[]' CHECK(json_valid(corrections_applied)),
+            patterns_learned TEXT DEFAULT '[]' CHECK(json_valid(patterns_learned)),
+            created_at REAL DEFAULT (julianday('now')) NOT NULL,
+            updated_at REAL DEFAULT (julianday('now')) NOT NULL,
+            expires_at REAL NOT NULL CHECK(expires_at > created_at),
+            is_active BOOLEAN DEFAULT TRUE NOT NULL,
+            UNIQUE(session_id, project_id)
+        );
+
+        -- Enhanced indexes for correction learning performance
+        CREATE INDEX IF NOT EXISTS idx_corrections_session ON user_corrections(session_id);
+        CREATE INDEX IF NOT EXISTS idx_corrections_project ON user_corrections(project_id);
+        CREATE INDEX IF NOT EXISTS idx_corrections_timestamp ON user_corrections(timestamp DESC);
+        CREATE INDEX IF NOT EXISTS idx_corrections_query_id ON user_corrections(query_id);
+        CREATE INDEX IF NOT EXISTS idx_corrections_type ON user_corrections(correction_type);
+        CREATE INDEX IF NOT EXISTS idx_corrections_confidence ON user_corrections(confidence DESC);
+        CREATE INDEX IF NOT EXISTS idx_corrections_applied ON user_corrections(applied);
+        CREATE INDEX IF NOT EXISTS idx_corrections_session_project ON user_corrections(session_id, project_id);
+        CREATE INDEX IF NOT EXISTS idx_corrections_project_timestamp ON user_corrections(project_id, timestamp DESC);
+
+        CREATE INDEX IF NOT EXISTS idx_correction_patterns_project ON correction_patterns(project_id);
+        CREATE INDEX IF NOT EXISTS idx_correction_patterns_confidence ON correction_patterns(confidence DESC);
+        CREATE INDEX IF NOT EXISTS idx_correction_patterns_type ON correction_patterns(pattern_type);
+        CREATE INDEX IF NOT EXISTS idx_correction_patterns_active ON correction_patterns(is_active);
+        CREATE INDEX IF NOT EXISTS idx_correction_patterns_usage ON correction_patterns(usage_count DESC);
+        CREATE INDEX IF NOT EXISTS idx_correction_patterns_success ON correction_patterns(success_rate DESC);
+        CREATE INDEX IF NOT EXISTS idx_correction_patterns_project_active ON correction_patterns(project_id, is_active);
+
+        CREATE INDEX IF NOT EXISTS idx_session_learning_session ON session_learning(session_id);
+        CREATE INDEX IF NOT EXISTS idx_session_learning_expires ON session_learning(expires_at);
+        CREATE INDEX IF NOT EXISTS idx_session_learning_active ON session_learning(is_active);
+        CREATE INDEX IF NOT EXISTS idx_session_learning_session_project ON session_learning(session_id, project_id);
+
+        -- Triggers for automatic maintenance
+        CREATE TRIGGER IF NOT EXISTS update_correction_timestamp
+        AFTER UPDATE ON user_corrections
+        FOR EACH ROW
+        BEGIN
+            UPDATE user_corrections SET updated_at = julianday('now') WHERE id = NEW.id;
+        END;
+
+        CREATE TRIGGER IF NOT EXISTS update_pattern_timestamp
+        AFTER UPDATE ON correction_patterns
+        FOR EACH ROW
+        BEGIN
+            UPDATE correction_patterns SET last_applied = julianday('now') WHERE id = NEW.id;
+        END;
+
+        CREATE TRIGGER IF NOT EXISTS update_session_learning_timestamp
+        AFTER UPDATE ON session_learning
+        FOR EACH ROW
+        BEGIN
+            UPDATE session_learning SET updated_at = julianday('now') WHERE id = NEW.id;
+        END;
+
+        -- Trigger to automatically clean up expired session learning
+        CREATE TRIGGER IF NOT EXISTS cleanup_expired_sessions
+        AFTER INSERT ON session_learning
+        FOR EACH ROW
+        WHEN (SELECT COUNT(*) FROM session_learning WHERE expires_at < julianday('now')) > 100
+        BEGIN
+            DELETE FROM session_learning WHERE expires_at < julianday('now');
+        END;
+
+        -- Trigger to update pattern usage statistics
+        CREATE TRIGGER IF NOT EXISTS update_pattern_usage
+        AFTER UPDATE OF usage_count ON correction_patterns
+        FOR EACH ROW
+        WHEN NEW.usage_count > OLD.usage_count
+        BEGIN
+            UPDATE correction_patterns
+            SET success_rate = CASE
+                WHEN NEW.usage_count > 0 THEN
+                    (OLD.success_rate * OLD.usage_count + 1.0) / NEW.usage_count
+                ELSE 0.0
+            END
+            WHERE id = NEW.id;
+        END;
+
         -- Insert schema version
-        INSERT OR REPLACE INTO db_metadata (key, value) VALUES ('schema_version', '1.0');
+        INSERT OR REPLACE INTO db_metadata (key, value) VALUES ('schema_version', '1.2');
         INSERT OR REPLACE INTO db_metadata (key, value) VALUES ('created_at', julianday('now'));
+        INSERT OR REPLACE INTO db_metadata (key, value) VALUES ('correction_learning_enabled', 'true');
         """
         
         # Use secure connection for schema creation
@@ -660,3 +783,22 @@ class DatabaseManager:
             self.connection_pool.clear()
 
         logger.info("Database connections closed")
+
+    # Correction Learning Methods
+    async def get_session_learning(self, session_id: str, project_id: str):
+        """Get session learning data"""
+        from ..corrections.manager import CorrectionManager
+        correction_manager = CorrectionManager(self)
+        return await correction_manager.get_session_learning(session_id, project_id)
+
+    async def store_session_learning(self, session_learning):
+        """Store session learning data"""
+        from ..corrections.manager import CorrectionManager
+        correction_manager = CorrectionManager(self)
+        return await correction_manager.store_session_learning(session_learning)
+
+    async def cleanup_expired_session_learning(self):
+        """Clean up expired session learning data"""
+        from ..corrections.manager import CorrectionManager
+        correction_manager = CorrectionManager(self)
+        return await correction_manager.cleanup_expired_session_learning()

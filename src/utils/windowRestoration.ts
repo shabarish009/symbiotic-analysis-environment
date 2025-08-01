@@ -78,7 +78,7 @@ const validateWindowState = (
 
   // Handle off-screen windows - ensure they're fully visible
   if (options.handleOffScreen) {
-    const desktop = { width: window.innerWidth, height: window.innerHeight - 30 }; // Account for taskbar
+    const desktop = { width: globalThis.innerWidth, height: globalThis.innerHeight - 30 }; // Account for taskbar
 
     let { x, y } = correctedWindow.position;
     const { width, height } = correctedWindow.size;
@@ -112,8 +112,8 @@ const validateWindowState = (
 const validateWindowSize = (size: { width: number; height: number }): { width: number; height: number } => {
   const MIN_WIDTH = 200;
   const MIN_HEIGHT = 100;
-  const MAX_WIDTH = window.innerWidth;
-  const MAX_HEIGHT = window.innerHeight - 30; // Account for taskbar
+  const MAX_WIDTH = globalThis.innerWidth;
+  const MAX_HEIGHT = globalThis.innerHeight - 30; // Account for taskbar
 
   return {
     width: Math.max(MIN_WIDTH, Math.min(MAX_WIDTH, size.width)),

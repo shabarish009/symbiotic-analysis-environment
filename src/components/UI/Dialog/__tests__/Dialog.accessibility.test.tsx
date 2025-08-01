@@ -15,11 +15,11 @@ expect.extend(toHaveNoViolations);
 
 describe('Dialog Components Accessibility', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('Dialog Component', () => {
-    const mockOnClose = jest.fn();
+    const mockOnClose = vi.fn();
 
     it('should pass axe accessibility tests when open', async () => {
       const { container } = render(

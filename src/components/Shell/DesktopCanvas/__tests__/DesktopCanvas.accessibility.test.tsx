@@ -21,34 +21,34 @@ describe('DesktopCanvas Accessibility', () => {
       name: 'My Computer',
       icon: '/icons/computer.png',
       position: { x: 50, y: 50 },
-      onDoubleClick: jest.fn(),
+      onDoubleClick: vi.fn(),
     },
     {
       id: 'icon2',
       name: 'Recycle Bin',
       icon: '/icons/recycle.png',
       position: { x: 50, y: 150 },
-      onDoubleClick: jest.fn(),
+      onDoubleClick: vi.fn(),
     },
     {
       id: 'icon3',
       name: 'My Documents',
       icon: '/icons/documents.png',
       position: { x: 50, y: 250 },
-      onDoubleClick: jest.fn(),
+      onDoubleClick: vi.fn(),
     },
   ];
 
   const defaultProps = {
     icons: mockIcons,
-    onIconSelect: jest.fn(),
-    onIconMove: jest.fn(),
-    onDesktopClick: jest.fn(),
-    onDesktopContextMenu: jest.fn(),
+    onIconSelect: vi.fn(),
+    onIconMove: vi.fn(),
+    onDesktopClick: vi.fn(),
+    onDesktopContextMenu: vi.fn(),
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('WCAG AA Compliance', () => {
@@ -106,8 +106,9 @@ describe('DesktopCanvas Accessibility', () => {
     });
 
     it('should validate ARIA relationships', () => {
-      const { container } = render(<DesktopCanvas {...defaultProps} />);
-      screenReaderTestUtils.validateARIAAttributes(container, {
+      render(<DesktopCanvas {...defaultProps} />);
+      const desktop = screen.getByRole('main');
+      screenReaderTestUtils.validateARIAAttributes(desktop, {
         'role': 'main',
         'aria-label': 'Desktop',
       });
@@ -319,15 +320,15 @@ describe('DesktopCanvas Accessibility', () => {
       // Mock prefers-reduced-motion
       Object.defineProperty(window, 'matchMedia', {
         writable: true,
-        value: jest.fn().mockImplementation(query => ({
+        value: vi.fn().mockImplementation(query => ({
           matches: query === '(prefers-reduced-motion: reduce)',
           media: query,
           onchange: null,
-          addListener: jest.fn(),
-          removeListener: jest.fn(),
-          addEventListener: jest.fn(),
-          removeEventListener: jest.fn(),
-          dispatchEvent: jest.fn(),
+          addListener: vi.fn(),
+          removeListener: vi.fn(),
+          addEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
+          dispatchEvent: vi.fn(),
         })),
       });
 

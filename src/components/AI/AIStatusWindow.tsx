@@ -8,6 +8,7 @@ import { Dialog } from '../UI/Dialog/Dialog';
 import { Button } from '../UI/Button/Button';
 import { ThoughtProcessPanel } from './ThoughtProcess/ThoughtProcessPanel';
 import { QueryData, ThoughtProcess } from '../../types/thoughtProcess';
+import { invoke } from '@tauri-apps/api/tauri';
 import './AIStatusWindow.css';
 
 export interface AIEngineStatus {
@@ -229,7 +230,6 @@ export const useAIEngineStatus = () => {
 
     try {
       // Call Tauri command to start AI engine
-      const { invoke } = await import('@tauri-apps/api/tauri');
       const result = await invoke('start_ai_engine') as string;
       console.log('AI Engine started:', result);
 
@@ -257,7 +257,6 @@ export const useAIEngineStatus = () => {
     setIsLoading(true);
 
     try {
-      const { invoke } = await import('@tauri-apps/api/tauri');
       const result = await invoke('stop_ai_engine') as string;
       console.log('AI Engine stopped:', result);
 
@@ -281,7 +280,6 @@ export const useAIEngineStatus = () => {
 
   const pollStatus = async () => {
     try {
-      const { invoke } = await import('@tauri-apps/api/tauri');
       const statusJson = await invoke('get_ai_engine_status') as string;
       const engineStatus = JSON.parse(statusJson);
       

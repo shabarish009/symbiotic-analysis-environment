@@ -284,7 +284,7 @@ export class SessionManager {
     // Store active window information in settings for restoration
     const enhancedSettings = {
       ...this.currentSession.settings,
-      activeWindowId,
+      activeWindowId: activeWindowId || undefined, // Convert null to undefined for validation
     };
 
     await this.saveSession({

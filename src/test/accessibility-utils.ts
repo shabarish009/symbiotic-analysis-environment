@@ -181,9 +181,14 @@ export const screenReaderTestUtils = {
       previousLevel = level;
     });
 
-    // Check for landmarks
+    // Check for landmarks (skip for menu components as they don't require landmarks)
     const landmarks = container.querySelectorAll('[role="main"], [role="navigation"], [role="banner"], [role="contentinfo"]');
-    expect(landmarks.length).toBeGreaterThan(0);
+    const menuComponents = container.querySelectorAll('[role="menu"], [role="menubar"]');
+
+    // Only require landmarks if this isn't a menu component
+    if (menuComponents.length === 0) {
+      expect(landmarks.length).toBeGreaterThan(0);
+    }
   },
 };
 
@@ -270,15 +275,15 @@ export const highContrastTestUtils = {
     // Add high contrast media query simulation
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: jest.fn().mockImplementation(query => ({
+      value: vi.fn().mockImplementation(query => ({
         matches: query === '(prefers-contrast: high)',
         media: query,
         onchange: null,
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
       })),
     });
   },

@@ -1,0 +1,308 @@
+/* Connection List Styles - Windows XP Aesthetic */
+
+.connection-list {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.connection-list-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  min-height: 300px;
+}
+
+.empty-state {
+  text-align: center;
+  color: #666;
+  max-width: 400px;
+}
+
+.empty-icon {
+  font-size: 48px;
+  margin-bottom: 16px;
+}
+
+.empty-state h3 {
+  margin: 0 0 8px 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.empty-state p {
+  margin: 4px 0;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+/* List Header */
+.connection-list-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.list-title h3 {
+  margin: 0;
+  font-size: 14px;
+  color: #333;
+}
+
+.list-legend {
+  display: flex;
+  gap: 12px;
+  font-size: 10px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #666;
+}
+
+.legend-icon {
+  font-size: 12px;
+}
+
+/* Connection Grid */
+.connection-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 12px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+/* Connection Card */
+.connection-card {
+  background: #ffffff;
+  border: 1px solid #c0c0c0;
+  border-radius: 2px;
+  padding: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.connection-card:hover {
+  border-color: #0066cc;
+  box-shadow: 0 2px 4px rgba(0, 102, 204, 0.2);
+}
+
+.connection-card.selected {
+  border-color: #0066cc;
+  background: #f0f8ff;
+  box-shadow: 0 2px 4px rgba(0, 102, 204, 0.3);
+}
+
+.connection-card:focus {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+}
+
+/* Connection Header */
+.connection-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.connection-info {
+  flex: 1;
+}
+
+.connection-name {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+}
+
+.db-type-icon {
+  font-size: 16px;
+}
+
+.name-text {
+  font-weight: bold;
+  font-size: 13px;
+  color: #000080;
+}
+
+.connection-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11px;
+  color: #666;
+}
+
+.db-type {
+  font-weight: bold;
+  color: #333;
+}
+
+.connection-host {
+  font-family: 'Courier New', monospace;
+}
+
+/* Connection Status */
+.connection-status {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.status-icon {
+  font-size: 14px;
+}
+
+.status-text {
+  font-size: 10px;
+  color: #666;
+  text-align: right;
+}
+
+/* Connection Meta */
+.connection-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-bottom: 12px;
+  padding: 8px;
+  background: #f8f8f8;
+  border: 1px inset #e0e0e0;
+  border-radius: 2px;
+}
+
+.meta-item {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+}
+
+.meta-label {
+  color: #666;
+  font-weight: bold;
+}
+
+.meta-value {
+  color: #333;
+  font-family: 'Courier New', monospace;
+}
+
+/* Connection Actions */
+.connection-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.connection-actions button {
+  font-size: 10px;
+  padding: 4px 8px;
+  min-width: auto;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .connection-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .connection-list-header {
+    flex-direction: column;
+    gap: 8px;
+    align-items: stretch;
+  }
+
+  .list-legend {
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .connection-header {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .connection-status {
+    align-items: flex-start;
+  }
+
+  .connection-actions {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .connection-meta {
+    font-size: 10px;
+  }
+
+  .meta-item {
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  .connection-actions {
+    flex-direction: column;
+  }
+
+  .connection-actions button {
+    width: 100%;
+  }
+}
+
+/* Accessibility */
+.connection-card[role="button"]:focus {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .connection-card {
+    border: 2px solid black;
+    background: white;
+  }
+
+  .connection-card.selected {
+    background: yellow;
+    border-color: black;
+  }
+
+  .connection-meta {
+    background: #f0f0f0;
+    border: 1px solid black;
+  }
+
+  .meta-label,
+  .meta-value {
+    color: black;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .connection-actions {
+    display: none;
+  }
+
+  .connection-card {
+    border: 1px solid black;
+    break-inside: avoid;
+    margin-bottom: 12px;
+  }
+
+  .connection-grid {
+    grid-template-columns: 1fr;
+  }
+}

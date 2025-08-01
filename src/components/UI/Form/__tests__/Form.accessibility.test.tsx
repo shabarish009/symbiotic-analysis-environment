@@ -15,11 +15,11 @@ expect.extend(toHaveNoViolations);
 
 describe('Form Components Accessibility', () => {
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('TextInput Component', () => {
-    const mockOnChange = jest.fn();
+    const mockOnChange = vi.fn();
 
     it('should pass axe accessibility tests', async () => {
       const { container } = render(

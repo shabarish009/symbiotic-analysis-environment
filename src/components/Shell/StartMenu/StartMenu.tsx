@@ -92,7 +92,7 @@ export const StartMenu: React.FC<StartMenuProps> = ({
     >
       {/* User Info Section */}
       {userInfo && (
-        <div className="start-menu-user" role="banner">
+        <div className="start-menu-user" role="group" aria-label="User information">
           <div className="start-menu-user-avatar">
             {userInfo.avatar ? (
               <img src={userInfo.avatar} alt="" role="presentation" />

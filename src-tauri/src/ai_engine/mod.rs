@@ -1,17 +1,17 @@
-//! AI Engine Management Module
-//! 
-//! This module handles the lifecycle management of the Python AI Core process,
-//! including spawning, monitoring, health checking, and communication via JSON-RPC.
-
-pub mod manager;
+// In src-tauri/src/ai_engine/mod.rs
 pub mod communication;
-pub mod types;
 pub mod config;
 pub mod health;
+pub mod manager;
+pub mod task_manager;
+pub mod types;
 
+// This line is crucial for enabling the test module
 #[cfg(test)]
 mod tests;
 
 pub use manager::AIEngineManager;
-pub use types::AIEngineStatus;
-pub use config::AIEngineConfig;
+pub use types::{
+    AIEngineStatus, AIEngineConfig, SQLGenerationRequest, SQLGenerationOptions,
+    SQLGenerationResponse, SQLGenerationProgress, CancellationRequest
+};

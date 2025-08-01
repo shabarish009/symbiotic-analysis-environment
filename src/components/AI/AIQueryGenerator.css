@@ -1,0 +1,356 @@
+/* AI Query Generator Styles - Windows XP Theme */
+
+.ai-query-generator {
+  background: #f0f0f0;
+  border: 2px outset #d4d0c8;
+  padding: 12px;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 11px;
+  margin-bottom: 8px;
+}
+
+.ai-query-generator__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.ai-query-generator__header h3 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: bold;
+  color: #000080;
+}
+
+.connection-indicator {
+  font-size: 10px;
+  color: #008000;
+  background: #e0ffe0;
+  padding: 2px 6px;
+  border: 1px solid #90ee90;
+  border-radius: 2px;
+}
+
+.ai-query-generator__input-section {
+  margin-bottom: 12px;
+}
+
+.ai-query-generator__label {
+  display: block;
+  margin-bottom: 4px;
+  font-weight: bold;
+  color: #000;
+}
+
+.ai-query-generator__textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 4px;
+  border: 2px inset #d4d0c8;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 11px;
+  background: #fff;
+  color: #000;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.ai-query-generator__textarea:focus {
+  outline: none;
+  border-color: #0078d4;
+}
+
+.ai-query-generator__textarea:disabled {
+  background: #f0f0f0;
+  color: #808080;
+}
+
+.ai-query-generator__help {
+  font-size: 10px;
+  color: #666;
+  margin-top: 4px;
+  text-align: right;
+}
+
+.ai-query-generator__examples {
+  margin-bottom: 12px;
+}
+
+.ai-query-generator__examples h4 {
+  margin: 0 0 6px 0;
+  font-size: 11px;
+  font-weight: bold;
+  color: #000;
+}
+
+.example-prompts {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.example-prompt {
+  background: #e1e1e1;
+  border: 1px outset #d4d0c8;
+  padding: 6px 8px;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 10px;
+  text-align: left;
+  cursor: pointer;
+  color: #000;
+  transition: background-color 0.1s;
+}
+
+.example-prompt:hover:not(:disabled) {
+  background: #d4d0c8;
+}
+
+.example-prompt:active {
+  border: 1px inset #d4d0c8;
+}
+
+.example-prompt:disabled {
+  background: #f0f0f0;
+  color: #808080;
+  cursor: not-allowed;
+}
+
+.ai-query-generator__actions {
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.generate-button,
+.cancel-button {
+  padding: 6px 16px;
+  font-family: 'Tahoma', sans-serif;
+  font-size: 11px;
+  font-weight: bold;
+  border: 2px outset #d4d0c8;
+  cursor: pointer;
+  min-width: 120px;
+}
+
+.generate-button.primary {
+  background: #0078d4;
+  color: #fff;
+}
+
+.generate-button.primary:hover:not(:disabled) {
+  background: #106ebe;
+}
+
+.generate-button.primary:active {
+  border: 2px inset #d4d0c8;
+}
+
+.generate-button:disabled {
+  background: #f0f0f0;
+  color: #808080;
+  cursor: not-allowed;
+}
+
+.cancel-button.secondary {
+  background: #e1e1e1;
+  color: #000;
+}
+
+.cancel-button.secondary:hover {
+  background: #d4d0c8;
+}
+
+.cancel-button.secondary:active {
+  border: 2px inset #d4d0c8;
+}
+
+/* Progress indicator styles (Zeus Directive requirement) */
+.ai-query-generator__progress {
+  background: #fff;
+  border: 2px inset #d4d0c8;
+  padding: 8px;
+  margin-bottom: 12px;
+}
+
+.progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.progress-stage {
+  font-weight: bold;
+  color: #000080;
+  text-transform: capitalize;
+}
+
+.progress-percent {
+  font-size: 10px;
+  color: #666;
+}
+
+.progress-message {
+  font-size: 10px;
+  color: #333;
+  margin-bottom: 6px;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 16px;
+  background: #f0f0f0;
+  border: 1px inset #d4d0c8;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(to right, #0078d4, #106ebe);
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.2) 25%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 50%,
+    transparent 75%,
+    rgba(255, 255, 255, 0.2) 75%
+  );
+  background-size: 16px 16px;
+  animation: progress-stripes 1s linear infinite;
+}
+
+@keyframes progress-stripes {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 16px 0;
+  }
+}
+
+/* Response information styles */
+.ai-query-generator__response {
+  background: #fff;
+  border: 2px inset #d4d0c8;
+  padding: 8px;
+}
+
+.confidence-indicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-size: 10px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+.confidence-indicator.high {
+  background: #e0ffe0;
+  color: #008000;
+  border: 1px solid #90ee90;
+}
+
+.confidence-indicator.medium {
+  background: #fff5e0;
+  color: #ff8c00;
+  border: 1px solid #ffd700;
+}
+
+.confidence-indicator.low {
+  background: #ffe0e0;
+  color: #dc143c;
+  border: 1px solid #ffb6c1;
+}
+
+.confidence-score {
+  font-size: 9px;
+  opacity: 0.8;
+}
+
+.warnings {
+  margin-bottom: 6px;
+}
+
+.warnings h5 {
+  margin: 0 0 4px 0;
+  font-size: 10px;
+  color: #dc143c;
+}
+
+.warnings ul {
+  margin: 0;
+  padding-left: 16px;
+  font-size: 10px;
+  color: #666;
+}
+
+.warnings li {
+  margin-bottom: 2px;
+}
+
+.generation-time {
+  font-size: 9px;
+  color: #666;
+  text-align: right;
+  margin-top: 6px;
+  font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .example-prompts {
+    max-height: 120px;
+    overflow-y: auto;
+  }
+  
+  .ai-query-generator__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  
+  .connection-indicator {
+    align-self: flex-end;
+  }
+}
+
+/* Accessibility improvements */
+.ai-query-generator__textarea:focus,
+.generate-button:focus,
+.cancel-button:focus,
+.example-prompt:focus {
+  outline: 2px solid #0078d4;
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .ai-query-generator {
+    border-color: #000;
+  }
+  
+  .ai-query-generator__textarea {
+    border-color: #000;
+  }
+  
+  .progress-bar {
+    border-color: #000;
+  }
+}

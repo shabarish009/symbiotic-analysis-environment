@@ -1,0 +1,171 @@
+/* Database Type Selector Styles - Windows XP Aesthetic */
+
+.database-type-selector {
+  width: 100%;
+}
+
+.database-type-select {
+  width: 100%;
+  padding: 4px 6px;
+  border: 1px inset #c0c0c0;
+  border-radius: 2px;
+  font-size: 11px;
+  font-family: 'Tahoma', sans-serif;
+  background: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.database-type-select:focus {
+  outline: none;
+  border-color: #0066cc;
+  box-shadow: 0 0 3px rgba(0, 102, 204, 0.3);
+}
+
+.database-type-select:disabled {
+  background: #f0f0f0;
+  color: #666;
+  cursor: not-allowed;
+}
+
+.database-type-select option:disabled {
+  color: #999;
+  font-style: italic;
+}
+
+/* Database Type Info */
+.database-type-info {
+  margin-top: 8px;
+  padding: 8px;
+  background: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  border-radius: 2px;
+  font-size: 11px;
+}
+
+.type-description {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.type-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.type-details {
+  flex: 1;
+}
+
+.type-name {
+  font-weight: bold;
+  color: #000080;
+  margin-bottom: 2px;
+}
+
+.type-desc {
+  color: #666;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.type-port {
+  color: #333;
+  font-size: 10px;
+  font-family: 'Courier New', monospace;
+}
+
+/* Features */
+.type-features {
+  border-top: 1px solid #d0d0d0;
+  padding-top: 8px;
+}
+
+.features-title {
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 4px;
+  font-size: 10px;
+}
+
+.features-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.feature-tag {
+  background: #e0e8ff;
+  color: #000080;
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-size: 9px;
+  border: 1px solid #c0d0ff;
+  white-space: nowrap;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .type-description {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .features-list {
+    justify-content: center;
+  }
+}
+
+/* Accessibility */
+.database-type-select:focus {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .database-type-select {
+    border: 2px solid black;
+    background: white;
+  }
+
+  .database-type-info {
+    background: white;
+    border: 2px solid black;
+  }
+
+  .type-name {
+    color: black;
+  }
+
+  .type-desc,
+  .type-port {
+    color: black;
+  }
+
+  .feature-tag {
+    background: white;
+    color: black;
+    border: 1px solid black;
+  }
+
+  .features-title {
+    color: black;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .database-type-info {
+    border: 1px solid black;
+    background: white;
+  }
+
+  .feature-tag {
+    border: 1px solid black;
+    background: white;
+  }
+}

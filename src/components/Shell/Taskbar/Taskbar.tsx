@@ -19,15 +19,22 @@ export const Taskbar: React.FC<TaskbarProps> = ({
 }) => {
   const [time, setTime] = useState(currentTime || new Date());
 
-  // Update clock every second
+  // Update clock every second (only if no currentTime prop is provided)
   useEffect(() => {
-    if (showClock) {
+    if (showClock && !currentTime) {
       const interval = setInterval(() => {
         setTime(new Date());
       }, 1000);
       return () => clearInterval(interval);
     }
-  }, [showClock]);
+  }, [showClock, currentTime]);
+
+  // Update time when currentTime prop changes
+  useEffect(() => {
+    if (currentTime) {
+      setTime(currentTime);
+    }
+  }, [currentTime]);
 
   const formatTime = (date: Date): string => {
     return date.toLocaleTimeString([], {
@@ -63,7 +70,7 @@ export const Taskbar: React.FC<TaskbarProps> = ({
     <div
       className={`taskbar ${className}`}
       data-testid={testId}
-      role="toolbar"
+      role="navigation"
       aria-label="Taskbar"
     >
       {/* Start Button */}

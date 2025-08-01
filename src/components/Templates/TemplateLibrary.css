@@ -1,0 +1,364 @@
+/* Template Library - Story 3.7 */
+/* Windows XP themed styles for template management interface */
+
+.template-library {
+  background: #f0f0f0;
+  border: 2px inset #d4d0c8;
+  border-radius: 0;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 500px;
+  max-height: 90vh;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.template-library-header {
+  background: linear-gradient(90deg, #0066cc 0%, #0080ff 100%);
+  color: white;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #d4d0c8;
+}
+
+.template-library-header h2 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.header-actions {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.action-button {
+  padding: 4px 8px;
+  background: #e0e0e0;
+  border: 2px outset #d4d0c8;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: 10px;
+  cursor: pointer;
+  color: #000000;
+}
+
+.action-button:hover {
+  background: #e8e8e8;
+}
+
+.action-button:active {
+  border: 2px inset #d4d0c8;
+}
+
+.action-button:disabled {
+  background: #c0c0c0;
+  color: #808080;
+  cursor: not-allowed;
+  border: 2px outset #c0c0c0;
+}
+
+.close-button {
+  background: #ff6666;
+  border: 2px outset #ff4444;
+  color: white;
+  padding: 2px 6px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  background: #ff8888;
+}
+
+.close-button:active {
+  border: 2px inset #ff4444;
+}
+
+.error-banner {
+  background: #ffe0e0;
+  border: 1px solid #ff6666;
+  padding: 8px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #cc0000;
+  font-weight: bold;
+}
+
+.error-message {
+  flex: 1;
+}
+
+.error-close {
+  background: none;
+  border: none;
+  color: #cc0000;
+  font-size: 14px;
+  cursor: pointer;
+  padding: 0 4px;
+}
+
+.error-close:hover {
+  background: #ffcccc;
+}
+
+.template-library-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Browse View Layout */
+.browse-view {
+  display: flex;
+  height: 100%;
+  overflow: hidden;
+}
+
+.browse-sidebar {
+  width: 300px;
+  min-width: 250px;
+  max-width: 400px;
+  background: #ffffff;
+  border-right: 1px solid #c0c0c0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.browse-main {
+  flex: 1;
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* No Selection State */
+.no-selection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 40px;
+  text-align: center;
+  color: #666666;
+}
+
+.no-selection h3 {
+  margin: 0 0 12px 0;
+  color: #000080;
+  font-size: 16px;
+}
+
+.no-selection p {
+  margin: 0 0 24px 0;
+  line-height: 1.4;
+}
+
+.library-stats {
+  display: flex;
+  gap: 24px;
+  margin-top: 20px;
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px;
+  background: #f8f8f8;
+  border: 1px solid #e0e0e0;
+  min-width: 80px;
+}
+
+.stat-value {
+  font-size: 24px;
+  font-weight: bold;
+  color: #0066cc;
+  margin-bottom: 4px;
+}
+
+.stat-label {
+  font-size: 10px;
+  color: #666666;
+  text-transform: uppercase;
+}
+
+/* Loading States */
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #666666;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #e0e0e0;
+  border-top: 2px solid #0066cc;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .template-library {
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .browse-view {
+    flex-direction: column;
+  }
+
+  .browse-sidebar {
+    width: 100%;
+    max-width: none;
+    height: 250px;
+    border-right: none;
+    border-bottom: 1px solid #c0c0c0;
+  }
+
+  .browse-main {
+    height: calc(100vh - 350px);
+  }
+
+  .header-actions {
+    flex-wrap: wrap;
+    gap: 2px;
+  }
+
+  .action-button {
+    padding: 3px 6px;
+    font-size: 9px;
+  }
+
+  .library-stats {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .template-library {
+    background: #ffffff;
+    border: 2px solid #000000;
+  }
+
+  .template-library-header {
+    background: #000000;
+    color: #ffffff;
+  }
+
+  .action-button {
+    background: #ffffff;
+    border: 2px solid #000000;
+    color: #000000;
+  }
+
+  .action-button:hover {
+    background: #f0f0f0;
+  }
+
+  .action-button:disabled {
+    background: #e0e0e0;
+    color: #808080;
+  }
+
+  .error-banner {
+    background: #ffffff;
+    border: 2px solid #ff0000;
+    color: #ff0000;
+  }
+
+  .stat-item {
+    background: #ffffff;
+    border: 2px solid #000000;
+  }
+
+  .stat-value {
+    color: #000000;
+  }
+}
+
+/* Print Styles */
+@media print {
+  .template-library {
+    border: 1px solid #000000;
+    background: #ffffff;
+  }
+
+  .template-library-header {
+    background: #ffffff;
+    color: #000000;
+    border-bottom: 2px solid #000000;
+  }
+
+  .header-actions,
+  .error-banner {
+    display: none;
+  }
+
+  .browse-view {
+    flex-direction: column;
+  }
+
+  .browse-sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #000000;
+  }
+
+  .action-button,
+  .close-button {
+    display: none;
+  }
+}
+
+/* Focus Management for Accessibility */
+.template-library:focus-within {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+}
+
+.action-button:focus,
+.close-button:focus,
+.error-close:focus {
+  outline: 2px solid #0066cc;
+  outline-offset: 1px;
+}
+
+/* Animation for View Transitions */
+.template-library-content > * {
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

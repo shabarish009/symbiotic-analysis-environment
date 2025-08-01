@@ -134,7 +134,10 @@ describe('Window Restoration Utilities', () => {
         },
       ];
 
-      const restored = restoreWindowStates(windowsWithInvalidBooleans);
+      // Disable ensureActiveWindow to test pure boolean validation
+      const restored = restoreWindowStates(windowsWithInvalidBooleans, {
+        ensureActiveWindow: false,
+      });
 
       expect(restored[0].isMinimized).toBe(true);
       expect(restored[0].isMaximized).toBe(true);

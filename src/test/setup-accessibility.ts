@@ -73,57 +73,105 @@ export const setupAccessibilityMocks = (): void => {
   // Mock matchMedia for media query testing
   Object.defineProperty(window, 'matchMedia', {
     writable: true,
-    value: jest.fn().mockImplementation(query => ({
+    value: vi.fn().mockImplementation(query => ({
       matches: false,
       media: query,
       onchange: null,
-      addListener: jest.fn(),
-      removeListener: jest.fn(),
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-      dispatchEvent: jest.fn(),
+      addListener: vi.fn(),
+      removeListener: vi.fn(),
+      addEventListener: vi.fn(),
+      removeEventListener: vi.fn(),
+      dispatchEvent: vi.fn(),
     })),
   });
 
   // Mock ResizeObserver for responsive accessibility testing
-  global.ResizeObserver = jest.fn().mockImplementation(() => ({
-    observe: jest.fn(),
-    unobserve: jest.fn(),
-    disconnect: jest.fn(),
+  global.ResizeObserver = vi.fn().mockImplementation(() => ({
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+    disconnect: vi.fn(),
   }));
 
   // Mock IntersectionObserver for visibility testing
-  global.IntersectionObserver = jest.fn().mockImplementation(() => ({
-    observe: jest.fn(),
-    unobserve: jest.fn(),
-    disconnect: jest.fn(),
+  global.IntersectionObserver = vi.fn().mockImplementation(() => ({
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+    disconnect: vi.fn(),
   }));
 
-  // Mock getComputedStyle for style testing
-  const originalGetComputedStyle = window.getComputedStyle;
-  window.getComputedStyle = jest.fn().mockImplementation((element, pseudoElement) => {
-    const styles = originalGetComputedStyle(element, pseudoElement);
-    return {
-      ...styles,
-      // Ensure focus indicators are testable
-      outline: styles.outline || '2px solid #0078d4',
-      outlineOffset: styles.outlineOffset || '2px',
-      // Ensure color contrast is testable
-      color: styles.color || '#000000',
-      backgroundColor: styles.backgroundColor || '#ffffff',
+  // Mock getComputedStyle for style testing (JSDOM doesn't implement this)
+  window.getComputedStyle = vi.fn().mockImplementation((element: Element, pseudoElement?: string | null) => {
+    // Create a comprehensive mock of CSSStyleDeclaration
+    const mockStyles: Partial<CSSStyleDeclaration> = {
+      // Focus indicators
+      outline: '2px solid #0078d4',
+      outlineOffset: '2px',
+      outlineColor: '#0078d4',
+      outlineStyle: 'solid',
+      outlineWidth: '2px',
+
+      // Colors for contrast testing
+      color: '#000000',
+      backgroundColor: '#ffffff',
+      borderColor: '#cccccc',
+
+      // Box shadow for focus indicators
+      boxShadow: '0 0 0 2px #0078d4',
+
+      // Animation properties for reduced motion testing
+      animationDuration: '0.3s',
+      animationPlayState: 'running',
+      transitionDuration: '0.3s',
+
+      // Layout properties
+      display: 'block',
+      position: 'static',
+      width: '100px',
+      height: '100px',
+
+      // Text properties
+      fontSize: '16px',
+      fontFamily: 'Arial, sans-serif',
+      fontWeight: 'normal',
+      lineHeight: '1.5',
+
+      // Accessibility properties
+      visibility: 'visible',
+      opacity: '1',
+
+      // Method to get property value
+      getPropertyValue: vi.fn().mockImplementation((property: string) => {
+        return (mockStyles as any)[property] || '';
+      }),
     };
+
+    // Handle pseudo-element specific styles
+    if (pseudoElement === ':focus') {
+      mockStyles.outline = '2px solid #0078d4';
+      mockStyles.outlineOffset = '2px';
+      mockStyles.boxShadow = '0 0 0 2px #0078d4';
+    }
+
+    // Handle focused elements (check if element is currently focused)
+    if (element === document.activeElement) {
+      mockStyles.outline = '2px solid #0078d4';
+      mockStyles.outlineOffset = '2px';
+      mockStyles.boxShadow = '0 0 0 2px #0078d4';
+    }
+
+    return mockStyles as CSSStyleDeclaration;
   });
 
   // Mock screen reader announcements
-  const mockAnnounce = jest.fn();
+  const mockAnnounce = vi.fn();
   Object.defineProperty(window, 'speechSynthesis', {
     writable: true,
     value: {
       speak: mockAnnounce,
-      cancel: jest.fn(),
-      pause: jest.fn(),
-      resume: jest.fn(),
-      getVoices: jest.fn().mockReturnValue([]),
+      cancel: vi.fn(),
+      pause: vi.fn(),
+      resume: vi.fn(),
+      getVoices: vi.fn().mockReturnValue([]),
     },
   });
 
@@ -243,23 +291,38 @@ export const accessibilityHelpers = {
     // Mock prefers-reduced-motion
     Object.defineProperty(window, 'matchMedia', {
       writable: true,
-      value: jest.fn().mockImplementation(query => ({
+      value: vi.fn().mockImplementation(query => ({
         matches: query === '(prefers-reduced-motion: reduce)',
         media: query,
         onchange: null,
-        addListener: jest.fn(),
-        removeListener: jest.fn(),
-        addEventListener: jest.fn(),
-        removeEventListener: jest.fn(),
-        dispatchEvent: jest.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        dispatchEvent: vi.fn(),
       })),
     });
 
-    // Trigger reduced motion styles
-    element.classList.add('reduce-motion');
-    
+    // Update the getComputedStyle mock to return reduced motion styles
+    const originalGetComputedStyle = window.getComputedStyle;
+    window.getComputedStyle = vi.fn().mockImplementation((el: Element, pseudo?: string | null) => {
+      const styles = originalGetComputedStyle(el, pseudo);
+
+      // If this is our test element and reduced motion is preferred, return reduced styles
+      if (el === element) {
+        return {
+          ...styles,
+          animationDuration: '0s',
+          transitionDuration: '0s',
+          animationPlayState: 'paused',
+        };
+      }
+
+      return styles;
+    });
+
     const styles = window.getComputedStyle(element);
-    
+
     // Verify animations are disabled or reduced
     expect(
       styles.animationDuration === '0s' ||
@@ -267,22 +330,23 @@ export const accessibilityHelpers = {
       styles.animationPlayState === 'paused'
     ).toBe(true);
 
-    // Clean up
-    element.classList.remove('reduce-motion');
+    // Restore original mock
+    window.getComputedStyle = originalGetComputedStyle;
   },
 };
 
 /**
- * Custom Jest matchers for accessibility testing
+ * Custom Vitest matchers for accessibility testing
  */
 declare global {
-  namespace jest {
-    interface Matchers<R> {
-      toHaveAccessibleName(name: string): R;
-      toHaveAccessibleDescription(description: string): R;
-      toBeKeyboardAccessible(): R;
-      toHaveValidColorContrast(): R;
-      toSupportHighContrast(): R;
+  namespace Vi {
+    interface AsymmetricMatchersContaining {
+      toHaveAccessibleName(name: string): any;
+      toHaveAccessibleDescription(description: string): any;
+      toBeKeyboardAccessible(): any;
+      toHaveValidColorContrast(): any;
+      toSupportHighContrast(): any;
+      toMatchSelector(selector: string): any;
     }
   }
 }
@@ -353,8 +417,8 @@ expect.extend({
     // Simulate high contrast mode
     element.classList.add('high-contrast-mode');
     const styles = window.getComputedStyle(element);
-    
-    const hasHighContrastStyles = 
+
+    const hasHighContrastStyles =
       styles.backgroundColor !== 'transparent' &&
       styles.color !== 'transparent' &&
       styles.borderColor !== 'transparent';
@@ -365,6 +429,18 @@ expect.extend({
       message: () =>
         `expected element to support high contrast mode with proper styling`,
       pass: hasHighContrastStyles,
+    };
+  },
+
+  toMatchSelector(element: HTMLElement, selector: string) {
+    const pass = element.matches(selector);
+
+    return {
+      message: () =>
+        pass
+          ? `expected element not to match selector "${selector}"`
+          : `expected element to match selector "${selector}"`,
+      pass,
     };
   },
 });

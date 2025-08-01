@@ -6,12 +6,13 @@ import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { SessionManager } from '../SessionManager';
 import { WindowState } from '../../components/Shell/types';
 
-// Mock localStorage
+// Mock localStorage with actual storage simulation
+const mockStorage: Record<string, string> = {};
 const localStorageMock = {
-  getItem: vi.fn(),
-  setItem: vi.fn(),
-  removeItem: vi.fn(),
-  clear: vi.fn(),
+  getItem: vi.fn((key: string) => mockStorage[key] || null),
+  setItem: vi.fn((key: string, value: string) => { mockStorage[key] = value; }),
+  removeItem: vi.fn((key: string) => { delete mockStorage[key]; }),
+  clear: vi.fn(() => { Object.keys(mockStorage).forEach(key => delete mockStorage[key]); }),
 };
 
 Object.defineProperty(window, 'localStorage', {
@@ -23,6 +24,13 @@ describe('SessionManager', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
+    // Clear mock storage
+    Object.keys(mockStorage).forEach(key => delete mockStorage[key]);
+    // Reset localStorage mock implementations to default behavior
+    localStorageMock.getItem.mockImplementation((key: string) => mockStorage[key] || null);
+    localStorageMock.setItem.mockImplementation((key: string, value: string) => { mockStorage[key] = value; });
+    localStorageMock.removeItem.mockImplementation((key: string) => { delete mockStorage[key]; });
+    localStorageMock.clear.mockImplementation(() => { Object.keys(mockStorage).forEach(key => delete mockStorage[key]); });
     sessionManager = SessionManager.getInstance();
   });
 
@@ -198,7 +206,7 @@ describe('SessionManager', () => {
       expect(windows).toHaveLength(1);
       expect(windows[0].id).toBe('window-1');
       expect(windows[0].title).toBe('Test Window');
-      expect(windows[0].isActive).toBe(false); // Should default to false
+      expect(windows[0].isActive).toBe(true); // Should be active since it's the only window
     });
   });
 
@@ -399,7 +407,19 @@ describe('SessionManager', () => {
       localStorageMock.setItem.mockClear();
 
       // Second save should create backup
-      await sessionManager.saveSession({ windows: { 'new-window': {} as any } });
+      await sessionManager.saveSession({
+        windows: {
+          'new-window': {
+            id: 'new-window',
+            title: 'New Window',
+            position: { x: 300, y: 300 },
+            size: { width: 600, height: 500 },
+            isMinimized: false,
+            isMaximized: false,
+            zIndex: 1002,
+          }
+        }
+      });
 
       // Should have called setItem for both backup and main save
       expect(localStorageMock.setItem).toHaveBeenCalledWith(

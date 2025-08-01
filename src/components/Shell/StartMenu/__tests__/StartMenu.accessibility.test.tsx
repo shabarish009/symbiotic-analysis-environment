@@ -69,13 +69,13 @@ describe('StartMenu Accessibility', () => {
   const defaultProps = {
     isOpen: true,
     items: mockItems,
-    onClose: jest.fn(),
-    onItemClick: jest.fn(),
+    onClose: vi.fn(),
+    onItemClick: vi.fn(),
     userInfo: mockUserInfo,
   };
 
   beforeEach(() => {
-    jest.clearAllMocks();
+    vi.clearAllMocks();
   });
 
   describe('WCAG AA Compliance', () => {
@@ -132,11 +132,11 @@ describe('StartMenu Accessibility', () => {
       expect(powerGroup).toBeInTheDocument();
     });
 
-    it('should have proper banner role for user info', () => {
+    it('should have proper group role for user info', () => {
       render(<StartMenu {...defaultProps} />);
-      
-      const userBanner = screen.getByRole('banner');
-      expect(userBanner).toBeInTheDocument();
+
+      const userInfo = screen.getByRole('group', { name: 'User information' });
+      expect(userInfo).toBeInTheDocument();
     });
 
     it('should have proper image alt attributes', () => {
@@ -368,15 +368,15 @@ describe('StartMenu Accessibility', () => {
       // Mock prefers-reduced-motion
       Object.defineProperty(window, 'matchMedia', {
         writable: true,
-        value: jest.fn().mockImplementation(query => ({
+        value: vi.fn().mockImplementation(query => ({
           matches: query === '(prefers-reduced-motion: reduce)',
           media: query,
           onchange: null,
-          addListener: jest.fn(),
-          removeListener: jest.fn(),
-          addEventListener: jest.fn(),
-          removeEventListener: jest.fn(),
-          dispatchEvent: jest.fn(),
+          addListener: vi.fn(),
+          removeListener: vi.fn(),
+          addEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
+          dispatchEvent: vi.fn(),
         })),
       });
 
@@ -452,7 +452,7 @@ describe('StartMenu Accessibility', () => {
       const userName = screen.getByText('Jane Doe');
       expect(userName).toBeInTheDocument();
       
-      const defaultAvatar = screen.getByRole('banner').querySelector('.default-avatar');
+      const defaultAvatar = screen.getByRole('group', { name: 'User information' }).querySelector('.default-avatar');
       expect(defaultAvatar).toBeInTheDocument();
       expect(defaultAvatar).toHaveAttribute('aria-hidden', 'true');
     });

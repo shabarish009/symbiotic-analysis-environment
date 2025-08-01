@@ -1,0 +1,48 @@
+# Local LLM Dependencies
+# Required packages for running local Large Language Models
+
+# Core LLM Inference Libraries
+llama-cpp-python>=0.2.20
+transformers>=4.35.0
+torch>=2.1.0
+tokenizers>=0.15.0
+
+# GPU Acceleration (Optional)
+# Uncomment based on your GPU:
+# For NVIDIA GPUs:
+# torch-audio  # For CUDA support
+# For AMD GPUs:
+# torch-rocm   # For ROCm support
+
+# HTTP Client for Model Downloads
+aiohttp>=3.9.0
+requests>=2.31.0
+
+# System Information and Hardware Detection
+psutil>=5.9.0
+
+# Security and Cryptography
+cryptography>=41.0.0
+
+# File Handling and Compression
+zipfile38>=0.0.3  # Backport for older Python versions
+
+# Testing Dependencies (Development)
+pytest>=7.4.0
+pytest-asyncio>=0.21.0
+
+# Optional: Quantization Support
+# bitsandbytes>=0.41.0  # For 8-bit/4-bit quantization
+
+# Optional: Advanced Model Formats
+# safetensors>=0.4.0    # For SafeTensors format support
+# gguf>=0.1.0           # For GGUF format support
+
+# Memory Optimization
+gc-python-utils>=1.0.0  # Enhanced garbage collection
+
+# Performance Monitoring
+memory-profiler>=0.61.0  # Memory usage profiling
+
+# Configuration Management
+pydantic>=2.5.0  # For model configuration validation

@@ -1,0 +1,300 @@
+/* AI Actions Panel - Story 3.6 */
+/* Windows XP themed styles for unified AI analysis actions */
+
+.ai-actions-panel {
+  background: #f0f0f0;
+  border: 2px outset #d4d0c8;
+  border-radius: 0;
+  padding: 12px;
+  margin: 8px 0;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+}
+
+.ai-actions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.ai-actions-header h3 {
+  margin: 0;
+  font-size: 12px;
+  font-weight: bold;
+  color: #000080;
+}
+
+.analysis-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 10px;
+  color: #000080;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-indicator.processing {
+  background: #00ff00;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.status-text {
+  font-weight: bold;
+}
+
+.ai-actions-buttons {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.ai-action-button {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: #e0e0e0;
+  border: 2px outset #d4d0c8;
+  border-radius: 0;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  min-width: 120px;
+  transition: all 0.1s ease;
+}
+
+.ai-action-button:hover:not(:disabled) {
+  background: #e8e8e8;
+  border: 2px outset #d8d4c8;
+}
+
+.ai-action-button:active:not(:disabled) {
+  border: 2px inset #d4d0c8;
+  background: #d8d8d8;
+}
+
+.ai-action-button:disabled {
+  background: #c0c0c0;
+  color: #808080;
+  cursor: not-allowed;
+  border: 2px outset #c0c0c0;
+}
+
+.ai-action-button .button-icon {
+  font-size: 14px;
+  line-height: 1;
+}
+
+.ai-action-button .button-text {
+  font-weight: normal;
+}
+
+/* Specific button styles */
+.explain-button:not(:disabled) {
+  background: #e8f4fd;
+  border-color: #b8d4f0;
+}
+
+.explain-button:hover:not(:disabled) {
+  background: #f0f8ff;
+  border-color: #c8e4ff;
+}
+
+.optimize-button:not(:disabled) {
+  background: #fff8e8;
+  border-color: #f0e4b8;
+}
+
+.optimize-button:hover:not(:disabled) {
+  background: #fffcf0;
+  border-color: #fff4c8;
+}
+
+.validate-button:not(:disabled) {
+  background: #f0fff0;
+  border-color: #c8f0c8;
+}
+
+.validate-button:hover:not(:disabled) {
+  background: #f8fff8;
+  border-color: #d8ffd8;
+}
+
+.cancel-button {
+  background: #ffe8e8 !important;
+  border-color: #f0b8b8 !important;
+  color: #800000 !important;
+}
+
+.cancel-button:hover:not(:disabled) {
+  background: #fff0f0 !important;
+  border-color: #ffc8c8 !important;
+}
+
+.analysis-progress {
+  margin-top: 8px;
+  padding: 8px;
+  background: #ffffff;
+  border: 1px inset #d4d0c8;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 16px;
+  background: #c0c0c0;
+  border: 1px inset #d4d0c8;
+  margin-bottom: 6px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #0066cc 0%, #0080ff 50%, #0066cc 100%);
+  transition: width 0.3s ease;
+  position: relative;
+}
+
+.progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.3) 25%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 50%,
+    transparent 75%,
+    rgba(255, 255, 255, 0.3) 75%
+  );
+  background-size: 16px 16px;
+  animation: progress-stripes 1s linear infinite;
+}
+
+@keyframes progress-stripes {
+  0% { background-position: 0 0; }
+  100% { background-position: 16px 0; }
+}
+
+.progress-details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 10px;
+}
+
+.progress-stage {
+  font-weight: bold;
+  color: #000080;
+  text-transform: capitalize;
+}
+
+.progress-message {
+  color: #404040;
+  font-style: italic;
+}
+
+.ai-actions-notice {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px;
+  background: #fffbf0;
+  border: 1px solid #f0e68c;
+  margin-top: 8px;
+  font-size: 10px;
+  color: #666600;
+}
+
+.notice-icon {
+  font-size: 12px;
+}
+
+.notice-text {
+  font-style: italic;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .ai-actions-buttons {
+    flex-direction: column;
+  }
+  
+  .ai-action-button {
+    min-width: auto;
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .progress-details {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2px;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .ai-actions-panel {
+    border: 3px solid #000000;
+    background: #ffffff;
+  }
+  
+  .ai-action-button {
+    border: 2px solid #000000;
+    background: #ffffff;
+    color: #000000;
+  }
+  
+  .ai-action-button:hover:not(:disabled) {
+    background: #f0f0f0;
+  }
+  
+  .progress-fill {
+    background: #000000;
+  }
+}
+
+/* Focus styles for accessibility */
+.ai-action-button:focus {
+  outline: 2px solid #0066cc;
+  outline-offset: 2px;
+}
+
+.ai-action-button:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .status-indicator.processing {
+    animation: none;
+  }
+  
+  .progress-fill::after {
+    animation: none;
+  }
+  
+  .ai-action-button {
+    transition: none;
+  }
+}

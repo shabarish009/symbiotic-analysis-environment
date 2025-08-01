@@ -38,9 +38,10 @@ class JSONRPCHandler:
         self.memory_config = MemoryConfig.from_env()
         self.memory_manager = MemoryManager(self.memory_config)
 
-        # Initialize consensus engine with memory
+        # Initialize local-aware consensus engine with memory
         self.consensus_config = ConsensusConfig.from_env()
-        self.consensus_engine = ConsensusEngine(self.consensus_config, self.memory_manager)
+        from consensus.local_aware_engine import LocalAwareConsensusEngine
+        self.consensus_engine = LocalAwareConsensusEngine(self.consensus_config, self.memory_manager)
         self.consensus_handler = ConsensusHandler(self.consensus_engine)
 
         self.methods = {
@@ -61,6 +62,23 @@ class JSONRPCHandler:
             'memory.get_statistics': self.handle_memory_get_stats,
             'memory.create_project': self.handle_memory_create_project,
             'memory.store_schema': self.handle_memory_store_schema,
+            # Correction learning methods
+            'correction.submit': self.handle_submit_correction,
+            'correction.feedback': self.handle_submit_feedback,
+            'correction.impact': self.handle_get_correction_impact,
+
+            # Local LLM methods
+            'local_llm.get_available_models': self.handle_get_available_models,
+            'local_llm.download_model': self.handle_download_model,
+            'local_llm.load_model': self.handle_load_model,
+            'local_llm.unload_model': self.handle_unload_model,
+            'local_llm.get_system_status': self.handle_get_system_status,
+            'local_llm.get_processing_mode': self.handle_get_processing_mode,
+            'local_llm.switch_to_local_mode': self.handle_switch_to_local_mode,
+            'local_llm.switch_to_cloud_mode': self.handle_switch_to_cloud_mode,
+            'local_llm.get_download_progress': self.handle_get_download_progress,
+            'correction.progress': self.handle_get_learning_progress,
+            'correction.cleanup_session': self.handle_cleanup_session,
         }
         self.running = True
         self.status = 'starting'
@@ -539,6 +557,145 @@ class JSONRPCHandler:
             logger.error(f"Schema storage failed: {e}")
             return {'error': str(e)}
 
+    # Correction Learning API Endpoints
+    async def handle_submit_correction(self, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Handle user correction submission"""
+        try:
+            if not params:
+                return {"success": False, "error": "Parameters required"}
+
+            # Import correction types
+            from .corrections.types import UserCorrection, CorrectionType, FeedbackScore
+
+            # Validate required parameters
+            required_fields = ['session_id', 'query_id', 'project_id', 'original_query', 'correction_type']
+            for field in required_fields:
+                if field not in params:
+                    return {"success": False, "error": f"Missing required field: {field}"}
+
+            # Create correction object
+            correction = UserCorrection(
+                session_id=params['session_id'],
+                query_id=params['query_id'],
+                project_id=params['project_id'],
+                original_query=params['original_query'],
+                corrected_query=params.get('corrected_query'),
+                correction_type=CorrectionType(params['correction_type']),
+                feedback_score=FeedbackScore(params['feedback_score']) if params.get('feedback_score') is not None else None,
+                correction_reason=params.get('correction_reason', ''),
+                context=params.get('context', {}),
+                confidence=params.get('confidence', 0.0),
+                metadata=params.get('metadata', {})
+            )
+
+            # Apply correction through consensus engine
+            if hasattr(self.consensus_engine, 'apply_user_correction'):
+                result = await self.consensus_engine.apply_user_correction(correction)
+                return result
+            else:
+                return {"success": False, "error": "Correction learning not available"}
+
+        except Exception as e:
+            logger.error(f"Error submitting correction: {e}")
+            return {"success": False, "error": str(e)}
+
+    async def handle_submit_feedback(self, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Handle user feedback submission"""
+        try:
+            if not params:
+                return {"success": False, "error": "Parameters required"}
+
+            from .corrections.types import FeedbackScore
+
+            # Validate required parameters
+            required_fields = ['query_id', 'feedback_score', 'session_id', 'project_id']
+            for field in required_fields:
+                if field not in params:
+                    return {"success": False, "error": f"Missing required field: {field}"}
+
+            # Submit feedback through consensus engine
+            if hasattr(self.consensus_engine, 'submit_feedback'):
+                result = await self.consensus_engine.submit_feedback(
+                    query_id=params['query_id'],
+                    feedback_score=FeedbackScore(params['feedback_score']),
+                    feedback_text=params.get('feedback_text', ''),
+                    session_id=params['session_id'],
+                    project_id=params['project_id']
+                )
+                return result
+            else:
+                return {"success": False, "error": "Feedback submission not available"}
+
+        except Exception as e:
+            logger.error(f"Error submitting feedback: {e}")
+            return {"success": False, "error": str(e)}
+
+    async def handle_get_correction_impact(self, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Get correction learning impact for session"""
+        try:
+            if not params:
+                return {"success": False, "error": "Parameters required"}
+
+            # Validate required parameters
+            required_fields = ['session_id', 'project_id']
+            for field in required_fields:
+                if field not in params:
+                    return {"success": False, "error": f"Missing required field: {field}"}
+
+            # Get impact through consensus engine
+            if hasattr(self.consensus_engine, 'get_correction_impact'):
+                result = await self.consensus_engine.get_correction_impact(
+                    session_id=params['session_id'],
+                    project_id=params['project_id']
+                )
+                return result
+            else:
+                return {"success": False, "error": "Correction impact not available"}
+
+        except Exception as e:
+            logger.error(f"Error getting correction impact: {e}")
+            return {"success": False, "error": str(e)}
+
+    async def handle_get_learning_progress(self, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Get learning progress and effectiveness metrics"""
+        try:
+            if not params:
+                return {"success": False, "error": "Parameters required"}
+
+            # Validate required parameters
+            if 'project_id' not in params:
+                return {"success": False, "error": "Missing required field: project_id"}
+
+            # Get progress through consensus engine
+            if hasattr(self.consensus_engine, 'get_learning_progress'):
+                result = await self.consensus_engine.get_learning_progress(
+                    project_id=params['project_id']
+                )
+                return result
+            else:
+                return {"success": False, "error": "Learning progress not available"}
+
+        except Exception as e:
+            logger.error(f"Error getting learning progress: {e}")
+            return {"success": False, "error": str(e)}
+
+    async def handle_cleanup_session(self, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
+        """Clean up session-specific correction data"""
+        try:
+            if not params or 'session_id' not in params:
+                return {"success": False, "error": "session_id parameter required"}
+
+            # Clean up through consensus engine
+            if hasattr(self.consensus_engine, 'cleanup_session_data'):
+                await self.consensus_engine.cleanup_session_data(params['session_id'])
+                return {"success": True, "message": "Session data cleaned up"}
+            else:
+                return {"success": False, "error": "Session cleanup not available"}
+
+        except Exception as e:
+            logger.error(f"Error cleaning up session: {e}")
+            return {"success": False, "error": str(e)}
+
 
 class AICore:
     """Main AI Core class"""
@@ -554,6 +711,105 @@ class AICore:
         except Exception as e:
             logger.error(f"Error starting AI Core: {e}")
             raise
+
+    # Local LLM Management Methods
+
+    async def handle_get_available_models(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Get list of available local models"""
+        try:
+            models = self.consensus_engine.local_llm_manager.get_available_models()
+            return {'success': True, 'data': models}
+        except Exception as e:
+            logger.error(f"Error getting available models: {e}")
+            return {'success': False, 'error': str(e)}
+
+    async def handle_download_model(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Download a local model"""
+        try:
+            model_name = params.get('model_name')
+            if not model_name:
+                return {'success': False, 'error': 'model_name parameter required'}
+
+            success = await self.consensus_engine.local_llm_manager.download_model(model_name)
+            return {'success': success, 'data': {'model_name': model_name, 'downloaded': success}}
+        except Exception as e:
+            logger.error(f"Error downloading model: {e}")
+            return {'success': False, 'error': str(e)}
+
+    async def handle_load_model(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Load a local model into memory"""
+        try:
+            model_name = params.get('model_name')
+            if not model_name:
+                return {'success': False, 'error': 'model_name parameter required'}
+
+            success = await self.consensus_engine.local_llm_manager.load_model(model_name)
+            return {'success': success, 'data': {'model_name': model_name, 'loaded': success}}
+        except Exception as e:
+            logger.error(f"Error loading model: {e}")
+            return {'success': False, 'error': str(e)}
+
+    async def handle_unload_model(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Unload a local model from memory"""
+        try:
+            model_name = params.get('model_name')
+            if not model_name:
+                return {'success': False, 'error': 'model_name parameter required'}
+
+            success = await self.consensus_engine.local_llm_manager.unload_model(model_name)
+            return {'success': success, 'data': {'model_name': model_name, 'unloaded': success}}
+        except Exception as e:
+            logger.error(f"Error unloading model: {e}")
+            return {'success': False, 'error': str(e)}
+
+    async def handle_get_system_status(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Get local LLM system status"""
+        try:
+            status = self.consensus_engine.local_llm_manager.get_system_status()
+            return {'success': True, 'data': status}
+        except Exception as e:
+            logger.error(f"Error getting system status: {e}")
+            return {'success': False, 'error': str(e)}
+
+    async def handle_get_processing_mode(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Get current processing mode (local/cloud)"""
+        try:
+            mode_info = self.consensus_engine.get_processing_mode()
+            return {'success': True, 'data': mode_info}
+        except Exception as e:
+            logger.error(f"Error getting processing mode: {e}")
+            return {'success': False, 'error': str(e)}
+
+    async def handle_switch_to_local_mode(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Switch to local processing mode"""
+        try:
+            success = await self.consensus_engine.switch_to_local_mode()
+            return {'success': success, 'data': {'mode': 'local', 'switched': success}}
+        except Exception as e:
+            logger.error(f"Error switching to local mode: {e}")
+            return {'success': False, 'error': str(e)}
+
+    async def handle_switch_to_cloud_mode(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Switch to cloud processing mode"""
+        try:
+            success = await self.consensus_engine.switch_to_cloud_mode()
+            return {'success': success, 'data': {'mode': 'cloud', 'switched': success}}
+        except Exception as e:
+            logger.error(f"Error switching to cloud mode: {e}")
+            return {'success': False, 'error': str(e)}
+
+    async def handle_get_download_progress(self, params: Dict[str, Any]) -> Dict[str, Any]:
+        """Get download progress for a model"""
+        try:
+            model_name = params.get('model_name')
+            if not model_name:
+                return {'success': False, 'error': 'model_name parameter required'}
+
+            progress = self.consensus_engine.local_llm_manager.downloader.get_download_progress(model_name)
+            return {'success': True, 'data': progress.__dict__ if progress else None}
+        except Exception as e:
+            logger.error(f"Error getting download progress: {e}")
+            return {'success': False, 'error': str(e)}
 
 
 async def main():

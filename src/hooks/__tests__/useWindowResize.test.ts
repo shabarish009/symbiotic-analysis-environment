@@ -86,8 +86,8 @@ describe('useWindowResize', () => {
 
     // Simulate mouse move that would make window too small
     const mouseMoveEvent = new MouseEvent('mousemove', {
-      clientX: 250, // Would make width 150 (below minimum)
-      clientY: 150, // Would make height 50 (below minimum)
+      clientX: -50, // deltaX = -50-200 = -250, newWidth = 400-250 = 150 (below min 200)
+      clientY: -50, // deltaY = -50-200 = -250, newHeight = 300-250 = 50 (below min 100)
     });
 
     act(() => {

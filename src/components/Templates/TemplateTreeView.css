@@ -1,0 +1,374 @@
+/* Template Tree View - Story 3.7 */
+/* Windows XP themed hierarchical tree view for templates */
+
+.template-tree-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: #ffffff;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+}
+
+.template-tree-view.loading {
+  justify-content: center;
+  align-items: center;
+}
+
+.tree-header {
+  padding: 8px 12px;
+  background: #f0f0f0;
+  border-bottom: 1px solid #c0c0c0;
+}
+
+.tree-header h4 {
+  margin: 0 0 4px 0;
+  font-size: 12px;
+  font-weight: bold;
+  color: #000080;
+}
+
+.tree-stats {
+  font-size: 10px;
+  color: #666666;
+}
+
+.tree-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+
+.tree-node-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.tree-node {
+  display: flex;
+  align-items: center;
+  padding: 2px 8px;
+  cursor: pointer;
+  user-select: none;
+  min-height: 20px;
+  position: relative;
+}
+
+.tree-node:hover {
+  background: #e0e8ff;
+}
+
+.tree-node.selected {
+  background: #316ac5;
+  color: white;
+}
+
+.tree-node.selected:hover {
+  background: #4080d0;
+}
+
+.tree-node:focus {
+  outline: 1px dotted #000000;
+  outline-offset: -1px;
+}
+
+.expand-icon {
+  width: 12px;
+  height: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 4px;
+  font-size: 8px;
+  cursor: pointer;
+  color: #666666;
+}
+
+.expand-icon.empty {
+  cursor: default;
+}
+
+.expand-icon:hover:not(.empty) {
+  background: #d0d0d0;
+  border-radius: 2px;
+}
+
+.node-icon {
+  margin-right: 6px;
+  font-size: 12px;
+}
+
+.node-name {
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-right: 8px;
+}
+
+.template-info {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.usage-count {
+  background: #e0e0e0;
+  color: #666666;
+  padding: 1px 4px;
+  border-radius: 2px;
+  font-size: 9px;
+  min-width: 16px;
+  text-align: center;
+}
+
+.tree-node.selected .usage-count {
+  background: rgba(255, 255, 255, 0.3);
+  color: white;
+}
+
+.favorite-icon {
+  font-size: 10px;
+  color: #ffaa00;
+}
+
+.tree-node.selected .favorite-icon {
+  color: #ffdd66;
+}
+
+.template-count {
+  color: #666666;
+  font-size: 10px;
+  margin-left: auto;
+}
+
+.tree-node.selected .template-count {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.tree-children {
+  border-left: 1px dotted #c0c0c0;
+  margin-left: 16px;
+}
+
+.empty-tree {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: #666666;
+  text-align: center;
+  padding: 20px;
+}
+
+.empty-tree p {
+  margin: 4px 0;
+  line-height: 1.4;
+}
+
+.loading-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #666666;
+}
+
+.loading-spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid #e0e0e0;
+  border-top: 2px solid #0066cc;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 8px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Context Menu */
+.context-menu {
+  background: #f0f0f0;
+  border: 2px outset #d4d0c8;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  min-width: 120px;
+  z-index: 1000;
+}
+
+.context-menu button {
+  display: block;
+  width: 100%;
+  padding: 6px 12px;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  color: #000000;
+}
+
+.context-menu button:hover {
+  background: #316ac5;
+  color: white;
+}
+
+.context-menu button.danger {
+  color: #cc0000;
+}
+
+.context-menu button.danger:hover {
+  background: #cc0000;
+  color: white;
+}
+
+.context-menu hr {
+  margin: 2px 0;
+  border: none;
+  border-top: 1px solid #c0c0c0;
+}
+
+/* Category-specific styling */
+.tree-node.category {
+  font-weight: normal;
+}
+
+.tree-node.category .node-name {
+  font-weight: bold;
+}
+
+/* Template-specific styling */
+.tree-node.template {
+  margin-left: 0;
+}
+
+.tree-node.template .node-icon {
+  color: #0066cc;
+}
+
+.tree-node.template.selected .node-icon {
+  color: #ffffff;
+}
+
+/* Accessibility improvements */
+.tree-node[aria-selected="true"] {
+  background: #316ac5;
+  color: white;
+}
+
+.tree-node:focus-visible {
+  outline: 2px solid #0066cc;
+  outline-offset: 1px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .template-tree-view {
+    background: #ffffff;
+    border: 1px solid #000000;
+  }
+
+  .tree-header {
+    background: #ffffff;
+    border-bottom: 2px solid #000000;
+  }
+
+  .tree-node:hover {
+    background: #e0e0e0;
+  }
+
+  .tree-node.selected {
+    background: #000000;
+    color: #ffffff;
+  }
+
+  .usage-count {
+    background: #ffffff;
+    border: 1px solid #000000;
+    color: #000000;
+  }
+
+  .tree-node.selected .usage-count {
+    background: #ffffff;
+    color: #000000;
+  }
+
+  .context-menu {
+    background: #ffffff;
+    border: 2px solid #000000;
+  }
+
+  .context-menu button:hover {
+    background: #000000;
+    color: #ffffff;
+  }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .tree-node {
+    padding: 4px 8px;
+    min-height: 24px;
+  }
+
+  .node-icon {
+    font-size: 14px;
+  }
+
+  .template-info {
+    gap: 6px;
+  }
+
+  .usage-count {
+    padding: 2px 6px;
+    font-size: 10px;
+  }
+
+  .favorite-icon {
+    font-size: 12px;
+  }
+
+  .context-menu {
+    min-width: 140px;
+  }
+
+  .context-menu button {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
+
+/* Print styles */
+@media print {
+  .template-tree-view {
+    background: #ffffff;
+    border: 1px solid #000000;
+  }
+
+  .tree-header {
+    background: #ffffff;
+    border-bottom: 1px solid #000000;
+  }
+
+  .tree-node.selected {
+    background: #e0e0e0;
+    color: #000000;
+  }
+
+  .context-menu {
+    display: none;
+  }
+
+  .expand-icon {
+    display: none;
+  }
+
+  .tree-children {
+    border-left: 1px solid #000000;
+  }
+}

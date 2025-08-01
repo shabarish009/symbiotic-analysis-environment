@@ -27,3 +27,29 @@ tokio = { version = "1.0", features = ["full"] }
 uuid = { version = "1.0", features = ["v4"] }
 thiserror = "1.0"
 anyhow = "1.0"
+rand = "0.8"
+chrono = { version = "0.4", features = ["serde"] }
+
+# Database drivers and connection management
+sqlx = { version = "0.7", features = ["runtime-tokio-rustls", "postgres", "mysql", "chrono", "uuid"] }
+rusqlite = { version = "0.31", features = ["bundled"] }
+
+# OS Keychain integration
+keyring = "2.3"
+
+# Security and encryption
+ring = "0.17"
+base64 = "0.22"
+
+# Connection pooling
+deadpool = "0.10"
+deadpool-postgres = "0.12"
+
+# System directories
+dirs = "5.0"
+
+# Async trait support
+async-trait = "0.1"
+
+# URL encoding
+urlencoding = "2.1"

@@ -17,6 +17,7 @@ export default defineConfig({
     minify: !process.env.TAURI_DEBUG ? 'esbuild' : false,
     sourcemap: !!process.env.TAURI_DEBUG,
     rollupOptions: {
+      external: ['@tauri-apps/api/tauri'],
       output: {
         manualChunks: {
           vendor: ['@tauri-apps/api', 'react', 'react-dom']

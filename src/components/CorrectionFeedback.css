@@ -1,0 +1,272 @@
+/* Correction Feedback Component - Windows XP Style */
+
+.correction-feedback {
+  background: #f0f0f0;
+  border: 2px outset #d4d0c8;
+  border-radius: 0;
+  padding: 8px;
+  margin: 8px 0;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+}
+
+.correction-feedback.submitted {
+  background: #e8f5e8;
+  border: 2px inset #90ee90;
+}
+
+.feedback-header {
+  margin-bottom: 8px;
+}
+
+.feedback-label {
+  font-weight: bold;
+  color: #000080;
+}
+
+.feedback-buttons {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+
+.feedback-btn {
+  background: #d4d0c8;
+  border: 2px outset #d4d0c8;
+  border-radius: 0;
+  padding: 4px 8px;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  min-width: 32px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+}
+
+.feedback-btn:hover:not(:disabled) {
+  background: #e8e5e2;
+}
+
+.feedback-btn:active:not(:disabled) {
+  border: 2px inset #d4d0c8;
+  background: #c0c0c0;
+}
+
+.feedback-btn:disabled {
+  background: #c0c0c0;
+  color: #808080;
+  cursor: not-allowed;
+  border: 2px outset #c0c0c0;
+}
+
+.thumbs-up {
+  color: #008000;
+}
+
+.thumbs-down {
+  color: #800000;
+}
+
+.edit-button {
+  color: #000080;
+}
+
+.suggestion-button {
+  color: #800080;
+}
+
+.feedback-success {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background: #ffffff;
+  border: 1px inset #d4d0c8;
+}
+
+.success-icon {
+  color: #008000;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.success-text {
+  color: #008000;
+  font-weight: bold;
+}
+
+.feedback-form,
+.correction-editor,
+.suggestion-form {
+  background: #ffffff;
+  border: 2px inset #d4d0c8;
+  padding: 8px;
+  margin-top: 8px;
+}
+
+.form-header {
+  margin-bottom: 8px;
+}
+
+.form-title {
+  font-weight: bold;
+  color: #000080;
+}
+
+.feedback-textarea,
+.correction-textarea,
+.reason-textarea,
+.suggestion-textarea {
+  width: 100%;
+  background: #ffffff;
+  border: 2px inset #d4d0c8;
+  border-radius: 0;
+  padding: 4px;
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  resize: vertical;
+  box-sizing: border-box;
+}
+
+.feedback-textarea:focus,
+.correction-textarea:focus,
+.reason-textarea:focus,
+.suggestion-textarea:focus {
+  outline: none;
+  background: #ffffcc;
+}
+
+.correction-textarea {
+  font-family: 'Courier New', monospace;
+  background: #f8f8ff;
+}
+
+.reason-textarea {
+  margin-top: 8px;
+  background: #fff8f0;
+}
+
+.suggestion-textarea {
+  background: #f0f8ff;
+}
+
+.form-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  justify-content: flex-end;
+}
+
+.btn-primary,
+.btn-secondary {
+  background: #d4d0c8;
+  border: 2px outset #d4d0c8;
+  border-radius: 0;
+  padding: 4px 12px;
+  font-family: 'MS Sans Serif', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  min-width: 75px;
+  height: 24px;
+}
+
+.btn-primary {
+  background: #0078d4;
+  color: white;
+  border: 2px outset #0078d4;
+  font-weight: bold;
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: #106ebe;
+  border: 2px outset #106ebe;
+}
+
+.btn-primary:active:not(:disabled) {
+  border: 2px inset #0078d4;
+  background: #005a9e;
+}
+
+.btn-primary:disabled {
+  background: #c0c0c0;
+  color: #808080;
+  cursor: not-allowed;
+  border: 2px outset #c0c0c0;
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: #e8e5e2;
+}
+
+.btn-secondary:active:not(:disabled) {
+  border: 2px inset #d4d0c8;
+  background: #c0c0c0;
+}
+
+.btn-secondary:disabled {
+  background: #c0c0c0;
+  color: #808080;
+  cursor: not-allowed;
+  border: 2px outset #c0c0c0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .feedback-buttons {
+    flex-wrap: wrap;
+  }
+  
+  .feedback-btn {
+    flex: 1;
+    min-width: 60px;
+  }
+  
+  .form-actions {
+    flex-direction: column;
+  }
+  
+  .btn-primary,
+  .btn-secondary {
+    width: 100%;
+  }
+}
+
+/* Animation for feedback submission */
+.correction-feedback.submitted {
+  animation: feedbackSuccess 0.3s ease-in-out;
+}
+
+@keyframes feedbackSuccess {
+  0% {
+    transform: scale(1);
+    background: #f0f0f0;
+  }
+  50% {
+    transform: scale(1.02);
+    background: #e8f5e8;
+  }
+  100% {
+    transform: scale(1);
+    background: #e8f5e8;
+  }
+}
+
+/* Focus indicators for accessibility */
+.feedback-btn:focus,
+.btn-primary:focus,
+.btn-secondary:focus {
+  outline: 2px dotted #000080;
+  outline-offset: 2px;
+}
+
+.feedback-textarea:focus,
+.correction-textarea:focus,
+.reason-textarea:focus,
+.suggestion-textarea:focus {
+  outline: 2px dotted #000080;
+  outline-offset: 1px;
+}
